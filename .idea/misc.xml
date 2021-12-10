@@ -4,9 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/boards.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.215625" />
+        <entry key="app/src/main/res/drawable/ic_settings_black.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout-v31/boards.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/activity_board.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/boards.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.22192028985507245" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.22192028985507245" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.67" />
       </map>
     </option>
   </component>
