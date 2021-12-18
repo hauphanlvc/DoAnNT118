@@ -6,8 +6,8 @@
 - Tạo Navigation View : Done ( Hậu ) 
 - Tạo mô tả card : 
 - Tạo Login :
-- Thêm các task, hiện chúng:
-- Tạo activity thông báo :
+- Thêm các task, hiện chúng: done
+- Tạo activity thông báo : done 
 - Tạo activity thêm card, thêm project :
 ### Kết nối database:
 - Tạo database trên fire base:
