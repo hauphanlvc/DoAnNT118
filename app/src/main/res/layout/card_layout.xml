@@ -5,8 +5,7 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tool:context=".MainActivity">
-
+    tool:context=".ActivityThe">
 
 
     <ScrollView
@@ -20,11 +19,11 @@
             <RelativeLayout
                 android:id="@+id/ViewTieuDe"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="90dp"
                 android:background="@color/LightBlue">
 
                 <TextView
-                    android:id="@+id/txTieuDe"
+                    android:id="@+id/tvTieuDe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
@@ -46,6 +45,7 @@
                 android:background="@drawable/border">
 
                 <TextView
+                    android:id="@+id/tvMota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
@@ -53,9 +53,76 @@
                     android:paddingEnd="15dp"
                     android:paddingBottom="15dp"
                     android:text="Mô tả của thẻ"
-                    android:textSize="18sp">
-                </TextView>
+                    android:textSize="18sp"></TextView>
+
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvNhan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ViewMota"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="Nhãn"></TextView>
+
+            <TextView
+                android:id="@+id/tvThanhVien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNhan"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="Thành viên"></TextView>
+
+            <TextView
+                android:id="@+id/tvDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvThanhVien"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="Ngày hết hạn">
+
+            </TextView>
+            <EditText
+                android:id="@+id/etDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Chọn một ngày"
+                android:layout_toRightOf="@+id/tvDeadline"
+                android:layout_alignBottom="@+id/tvDeadline"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp">
+            </EditText>
+
+            <TextView
+                android:id="@+id/tvTaskList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDeadline"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="Danh sách công việc"></TextView>
+
+            <TextView
+                android:id="@+id/tvDinhKem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTaskList"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="File đính kèm"></TextView>
 
         </RelativeLayout>
     </ScrollView>
