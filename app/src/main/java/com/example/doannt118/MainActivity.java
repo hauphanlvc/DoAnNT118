@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
         AddTaskButton();
         HienThiTenDuAn();
 
+
+
     }
+
+
     public void HienThiTenDuAn()
     {
 
@@ -126,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     isAllFabsVisible= false;
 
                 }
+
                 fabAddTask.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -136,8 +141,9 @@ public class MainActivity extends AppCompatActivity {
                 fabAddProject.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, "thêm dự án  nào ", Toast.LENGTH_SHORT).show();
-
+//                        Toast.makeText(MainActivity.this, "thêm dự án  nào ", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(v.getContext(), Activity_them_du_an.class);
+                        v.getContext().startActivity(intent);
                     }
                 });
 
