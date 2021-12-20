@@ -1,6 +1,8 @@
 package com.example.doannt118;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +22,7 @@ public class ActivityThe extends AppCompatActivity {
 
     EditText etDate;
     ImageView ivCalendar;
+    TextView tvTieuDe;
     DatePickerDialog.OnDateSetListener setListener;
 
     @Override
@@ -28,6 +32,7 @@ public class ActivityThe extends AppCompatActivity {
 
         etDate = findViewById(R.id.etDeadline);
         ivCalendar = findViewById(R.id.ivCalendar);
+        tvTieuDe = findViewById(R.id.tvTieuDe);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -46,6 +51,30 @@ public class ActivityThe extends AppCompatActivity {
                     }
                 },year,month,day);
                 datePickerDialog.show();
+            }
+        });
+
+        tvTieuDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mydialog = new AlertDialog.Builder(ActivityThe.this);
+                mydialog.setTitle("Chỉnh sửa tiêu đề");
+                final EditText title_input = new EditText(ActivityThe.this);
+                title_input.setText(tvTieuDe.getText().toString());
+                mydialog.setView(title_input);
+                mydialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        tvTieuDe.setText(title_input.getText().toString());
+                    }
+                });
+                mydialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                mydialog.show();
             }
         });
 
