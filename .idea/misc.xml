@@ -6,6 +6,7 @@
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25833333333333336" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/boards.xml" value="0.25833333333333336" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/border.xml" value="0.13802083333333334" />
+        <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/calendar_icon.xml" value="0.13802083333333334" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/ic_launcher_background.xml" value="0.25833333333333336" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/ic_menu.xml" value="0.25833333333333336" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/ic_notifications.xml" value="0.25833333333333336" />
@@ -14,9 +15,11 @@
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/drawable/ic_vertical_dots.xml" value="0.13802083333333334" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/activity_notifications.xml" value="0.2" />
+        <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/activity_them_du_an.xml" value="0.264" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/activity_them_the.xml" value="0.176" />
-        <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/card_layout.xml" value="0.2" />
+        <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/card_layout.xml" value="0.264" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/header_navigation_view.xml" value="0.16893115942028986" />
+        <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/item_du_an.xml" value="0.264" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/layout_project_item.xml" value="0.176" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/layout/project_activity.xml" value="0.264" />
         <entry key="..\:/Program Files/Android/DoAnNT118/app/src/main/res/menu/card_menu.xml" value="0.2421875" />

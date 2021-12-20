@@ -83,15 +83,28 @@
                 android:text="Ngày hết hạn">
 
             </TextView>
+
             <EditText
                 android:id="@+id/etDeadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Chọn một ngày"
+                android:layout_alignBottom="@+id/tvDeadline"
                 android:layout_toRightOf="@+id/tvDeadline"
-                android:layout_alignBottom="@+id/tvDeadline">
+                android:hint="Chọn một ngày"
+                android:enabled="false">
 
             </EditText>
+
+            <ImageView
+                android:id="@+id/ivCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/etDeadline"
+                android:layout_toRightOf="@+id/etDeadline"
+                android:padding="15dp"
+                android:src="@drawable/calendar_icon">
+
+            </ImageView>
             <TextView
                 android:id="@+id/tvTasklist"
                 android:layout_width="wrap_content"
