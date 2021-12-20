@@ -19,6 +19,11 @@ import android.widget.Toast;
 import com.example.doannt118.Class.TenDuAn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +36,20 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fabAddTask,fabAdd,fabAddProject;
     TextView tvAddCard,tvAddProject;
     RecyleViewDanhSachDuAn adapter;
+    DatabaseReference mFirebaseDatabase;
+    FirebaseDatabase mFirebaseInstance;
     // kiểm tra nút add có đang nhấn hay không
-
+    String userId;
     Boolean isAllFabsVisible;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        // Write a message to the database
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("user");
+
 
         drawerLayout = findViewById(R.id.drawerLayout);
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
@@ -62,8 +73,29 @@ public class MainActivity extends AppCompatActivity {
         AddTaskButton();
         HienThiTenDuAn();
 
+        // Read from the database
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            private static final String TAG = "read data";
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d(TAG, "Value is: " + value);
+//                tenDuAns.add(new TenDuAn(value));
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+        mFirebaseInstance = FirebaseDatabase.getInstance();
 
-
+        // get reference to 'users' node
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
     }
 
 

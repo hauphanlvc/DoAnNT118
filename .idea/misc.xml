@@ -13,8 +13,12 @@
         <entry key="app/src/main/res/drawable/ic_vertical_dots.xml" value="0.215625" />
         <entry key="app/src/main/res/layout-v31/boards.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/activity_board.xml" value="0.2368659420289855" />
+        <entry key="app/src/main/res/layout/activity_dang_ky.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/layout/activity_dang_nhap.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_them_du_an.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_them_the.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.25" />
