@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         fabAdd = (FloatingActionButton) findViewById(R.id.fab);
         fabAddTask = (FloatingActionButton) findViewById(R.id.fabAddTask);
         tvAddCard = (TextView) findViewById(R.id.textViewAddTask);
+        fabAddTask.setVisibility(View.GONE);
+        tvAddCard.setVisibility(View.GONE);
         fabAdd.show();
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
