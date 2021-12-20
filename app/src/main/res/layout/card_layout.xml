@@ -23,7 +23,7 @@
                 android:background="@color/LightBlue">
 
                 <TextView
-                    android:id="@+id/txTieuDe"
+                    android:id="@+id/tvTieuDe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
@@ -45,6 +45,7 @@
                 android:background="@drawable/border">
 
                 <TextView
+                    android:id="@+id/tvMota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
@@ -54,6 +55,74 @@
                     android:text="Mô tả của thẻ"
                     android:textSize="18sp"></TextView>
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvNhan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ViewMota"
+                android:padding="15dp"
+                android:text="Nhãn">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvThanhvien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNhan"
+                android:padding="15dp"
+                android:text="Thành viên">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tvDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvThanhvien"
+                android:padding="15dp"
+                android:text="Ngày hết hạn">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/etDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tvDeadline"
+                android:layout_toRightOf="@+id/tvDeadline"
+                android:hint="Chọn một ngày"
+                android:enabled="false">
+
+            </EditText>
+
+            <ImageView
+                android:id="@+id/ivCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/etDeadline"
+                android:layout_toRightOf="@+id/etDeadline"
+                android:padding="15dp"
+                android:src="@drawable/calendar_icon">
+
+            </ImageView>
+            <TextView
+                android:id="@+id/tvTasklist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDeadline"
+                android:padding="15dp"
+                android:text="Danh sách công việc">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tvFile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTasklist"
+                android:padding="15dp"
+                android:text="File đính kèm">
+            </TextView>
 
         </RelativeLayout>
     </ScrollView>
