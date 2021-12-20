@@ -45,6 +45,7 @@
                 android:background="@drawable/border">
 
                 <TextView
+                    android:id="@+id/tvMota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"

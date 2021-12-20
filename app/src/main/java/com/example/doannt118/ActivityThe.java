@@ -22,7 +22,7 @@ public class ActivityThe extends AppCompatActivity {
 
     EditText etDate;
     ImageView ivCalendar;
-    TextView tvTieuDe;
+    TextView tvTieuDe,tvMota;
     DatePickerDialog.OnDateSetListener setListener;
 
     @Override
@@ -33,6 +33,7 @@ public class ActivityThe extends AppCompatActivity {
         etDate = findViewById(R.id.etDeadline);
         ivCalendar = findViewById(R.id.ivCalendar);
         tvTieuDe = findViewById(R.id.tvTieuDe);
+        tvMota = findViewById(R.id.tvMota);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -66,6 +67,30 @@ public class ActivityThe extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         tvTieuDe.setText(title_input.getText().toString());
+                    }
+                });
+                mydialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                mydialog.show();
+            }
+        });
+
+        tvMota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mydialog = new AlertDialog.Builder(ActivityThe.this);
+                mydialog.setTitle("Chỉnh sửa mô tả");
+                final EditText title_input = new EditText(ActivityThe.this);
+                title_input.setText(tvMota.getText().toString());
+                mydialog.setView(title_input);
+                mydialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        tvMota.setText(title_input.getText().toString());
                     }
                 });
                 mydialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
