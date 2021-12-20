@@ -35,6 +35,10 @@
         <activity
             android:name=".MainActivityProject"
             android:exported="true" />
+
+        <activity
+            android:name=".ActivityThe"
+            android:exported="true"/>
     </application>
 
 </manifest>

@@ -22,59 +22,59 @@
             android:paddingEnd="15dp"
             android:paddingBottom="15dp"
             android:src="?attr/actionModeCloseDrawable"
-            app:tint="@color/white">
-
-        </ImageView>
-
+            app:tint="@color/white"></ImageView>
     </RelativeLayout>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/maincard">
+        android:layout_below="@+id/maincard">
 
         <RelativeLayout
-            android:id="@+id/ViewTieuDe"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/LightBlue">
+            android:layout_height="match_parent"
+            android:layout_below="@id/maincard">
 
-            <TextView
-                android:id="@+id/txTieuDe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="15dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="15dp"
-                android:text="Tiêu đề của thẻ"
-                android:textColor="@color/white"
-                android:textSize="25sp">
+            <RelativeLayout
+                android:id="@+id/ViewTieuDe"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/LightBlue">
 
-            </TextView>
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/txTieuDe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Tiêu đề của thẻ"
+                    android:textColor="@color/white"
+                    android:textSize="25sp">
 
-        <RelativeLayout
-            android:id="@+id/ViewMota"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ViewTieuDe"
-            android:background="@drawable/border">
+                </TextView>
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/ViewMota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="15dp"
-                android:paddingTop="15dp"
-                android:paddingEnd="15dp"
-                android:paddingBottom="15dp"
-                android:text="Mô tả của thẻ"
-                android:textSize="18sp">
+                android:layout_below="@+id/ViewTieuDe"
+                android:background="@drawable/border">
 
-            </TextView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="15dp"
+                    android:text="Mô tả của thẻ"
+                    android:textSize="18sp"></TextView>
+            </RelativeLayout>
 
         </RelativeLayout>
-
-    </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
