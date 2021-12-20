@@ -37,7 +37,7 @@
                 android:layout_width="263dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="Boards"
+                android:text="Danh sách dự án"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -48,7 +48,8 @@
                 android:layout_height="30dp"
 
                 android:src="@drawable/ic_notifications"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:contentDescription="noficication symbol" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -75,7 +76,7 @@
             android:clickable="true"
             app:srcCompat="@android:drawable/ic_input_add"
             android:focusable="true"
-            />
+            android:contentDescription="nút thêm" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddTask"
@@ -89,8 +90,9 @@
             app:layout_constraintBottom_toTopOf="@+id/fab"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/add_card"
-            android:visibility="gone"
-            android:focusable="true" />
+            android:visibility="visible"
+            android:focusable="true"
+            android:contentDescription="thêm thẻ"/>
 
         <TextView
             android:id="@+id/textViewAddTask"
@@ -98,10 +100,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:text="Add Task"
+            android:text="thêm thẻ"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/fabAddTask"
             app:layout_constraintTop_toTopOf="@+id/fabAddTask" />
     </androidx.constraintlayout.widget.ConstraintLayout>

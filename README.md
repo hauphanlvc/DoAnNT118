@@ -4,11 +4,11 @@
 ### Layout: 
 - Tạo boards : Done ( Hậu ) 
 - Tạo Navigation View : Done ( Hậu ) 
-- Tạo mô tả card : 
-- Tạo Login :
+- Tạo mô tả thẻ : Đang làm ( Hải )  
+- Tạo Login : Đang làm ( Hào ) 
 - Thêm các task, hiện chúng: done
-- Tạo activity thông báo : done 
-- Tạo activity thêm card, thêm project :
+- Tạo activity thông báo : Đang làm 70 % ( chưa thêm recycle view cho danh sách các thông báo )  ( Hậu )  
+- Tạo activity thêm card, thêm project : Đang làm ( Hậu ) 
 ### Kết nối database:
 - Tạo database trên fire base:
 - Hoàn thiện lại sơ đồ các bảng của data.

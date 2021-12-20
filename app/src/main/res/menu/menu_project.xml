@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu1"
-        android:icon="@drawable/notification"
+        android:icon="@drawable/ic_notifications"
         android:title="Menu 2"
         app:showAsAction="always" />
     <item
