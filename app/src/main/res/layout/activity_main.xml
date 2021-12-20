@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutToolBar"
             android:layout_width="0dp"
             android:layout_height="?actionBarSize"
@@ -30,37 +30,58 @@
                 android:layout_height="30dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/boards"
-                android:layout_width="263dp"
-                android:layout_height="wrap_content"
+                android:layout_width="143dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="10dp"
                 android:text="Danh sách dự án"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageMenu"
+                app:layout_constraintStart_toEndOf="@+id/imageMenu"
+                app:layout_constraintTop_toTopOf="@+id/imageMenu" />
 
             <ImageView
                 android:id="@+id/notification"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
 
+                android:layout_marginStart="96dp"
+                android:contentDescription="noficication symbol"
                 android:src="@drawable/ic_notifications"
-                app:tint="@color/white"
-                android:contentDescription="noficication symbol" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/boards"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="40dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:text="0"
+                app:layout_constraintStart_toEndOf="@+id/notification"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ListProject"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutToolBar" />
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -92,7 +113,7 @@
             app:srcCompat="@drawable/add_card"
             android:visibility="visible"
             android:focusable="true"
-            android:contentDescription="thêm thẻ"/>
+            android:contentDescription="Thêm thẻ"/>
 
         <TextView
             android:id="@+id/textViewAddTask"
@@ -100,12 +121,42 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:text="thêm thẻ"
+            android:text="Thêm thẻ"
             android:textSize="16sp"
             android:textStyle="bold"
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/fabAddTask"
+            app:layout_constraintStart_toStartOf="@+id/tv_add_project"
             app:layout_constraintTop_toTopOf="@+id/fabAddTask" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddProject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:contentDescription="Thêm dự án"
+            android:focusable="true"
+            android:visibility="visible"
+            app:backgroundTint="@color/LightBlue"
+            app:layout_constraintBottom_toTopOf="@+id/fabAddTask"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add_project" />
+
+        <TextView
+            android:id="@+id/tv_add_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="Thêm dự án "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/fabAddProject"
+            app:layout_constraintEnd_toStartOf="@+id/fabAddProject"
+            app:layout_constraintTop_toTopOf="@+id/fabAddProject"
+            app:layout_constraintVertical_bias="0.47" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/design_navigation_view"

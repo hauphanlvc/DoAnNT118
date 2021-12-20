@@ -7,5 +7,5 @@
     <item
         android:id="@+id/menuLogOut"
         android:icon="@drawable/logout"
-        android:title="Đăng " />
+        android:title="Đăng xuất" />
 </menu>
