@@ -7,33 +7,15 @@
     android:layout_height="match_parent"
     tool:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/maincard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/LightBlue">
 
-        <ImageView
-            android:id="@+id/backcard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="15dp"
-            android:paddingTop="15dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="15dp"
-            android:src="?attr/actionModeCloseDrawable"
-            app:tint="@color/white"></ImageView>
-    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/maincard">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/maincard">
+            android:layout_height="match_parent">
 
             <RelativeLayout
                 android:id="@+id/ViewTieuDe"
@@ -71,7 +53,8 @@
                     android:paddingEnd="15dp"
                     android:paddingBottom="15dp"
                     android:text="Mô tả của thẻ"
-                    android:textSize="18sp"></TextView>
+                    android:textSize="18sp">
+                </TextView>
             </RelativeLayout>
 
         </RelativeLayout>
