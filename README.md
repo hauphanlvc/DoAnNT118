@@ -8,7 +8,7 @@
 - Tạo Login : Đang làm ( Hào ) 
 - Thêm các task, hiện chúng: done
 - Tạo activity thông báo : Đang làm 70 % ( chưa thêm recycle view cho danh sách các thông báo )  ( Hậu )  
-- Tạo activity thêm card, thêm project : Đang làm ( Hậu ) 
+- Tạo activity thêm card, thêm project : 50 % Đang làm ( Hậu ) 
 ### Kết nối database:
 - Tạo database trên fire base:
 - Hoàn thiện lại sơ đồ các bảng của data.
