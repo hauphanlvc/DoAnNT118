@@ -49,8 +49,8 @@ public class ActivityDangNhap extends AppCompatActivity {
                 {
 
 //                    password_nhap = ed_password.getText().toString();
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("user/" + email_nhap + "/" + email_nhap);
-                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
+                    mDatabase.child(email_nhap).addListenerForSingleValueEvent(new ValueEventListener() {
                         private static final String TAG = "read dataa";
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {

@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ActivityDangKy extends AppCompatActivity {
     EditText ed_email,ed_password;
     Button button_dang_ky_activity;
-    String userId,email_true,password_true,email_nhap,password_nhap;
+    String email_nhap,password_nhap;
     User user_nhap;
     DatabaseReference mDatabase;
     @Override
