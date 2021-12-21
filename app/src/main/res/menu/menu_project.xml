@@ -11,37 +11,37 @@
         android:id="@+id/menu2"
         android:checkable="false"
 
-        android:title="Test"
+        android:title="Mời vào bảng"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu3"
         android:checkable="false"
 
-        android:title="Test"
+        android:title="Thêm thành viên"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu4"
         android:checkable="false"
 
-        android:title="Test"
+        android:title="Hoạt động"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu5"
         android:checkable="false"
 
-        android:title="Test"
+        android:title="Thiết lập bảng"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu6"
         android:checkable="false"
 
-        android:title="Test"
+        android:title="Thẻ đã lưu trữ"
         app:showAsAction="collapseActionView" />
     <item
         android:id="@+id/menu7"
         android:checkable="false"
 
-        android:title="Test"
+        android:title="Danh sách đã lưu trữ"
         app:showAsAction="collapseActionView" />
 
 </menu>
