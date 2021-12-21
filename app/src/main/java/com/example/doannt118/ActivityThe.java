@@ -145,10 +145,10 @@ public class ActivityThe extends AppCompatActivity {
 
     public void addColorButton() {
         isAllFabsVisible=false;
-        red = findViewById(R.id.fabRed);
-        blue = findViewById(R.id.fabBlue);
-        yellow = findViewById(R.id.fabYellow);
-        green = findViewById(R.id.fabGreen);
+//        red = findViewById(R.id.fabRed);
+//        blue = findViewById(R.id.fabBlue);
+//        yellow = findViewById(R.id.fabYellow);
+//        green = findViewById(R.id.fabGreen);
         tvNhan=findViewById(R.id.tvNhan);
         red.setVisibility(View.GONE);
         yellow.setVisibility(View.GONE);

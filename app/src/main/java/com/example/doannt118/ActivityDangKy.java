@@ -20,15 +20,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ActivityDangKy extends AppCompatActivity {
-    EditText ed_email,ed_password;
+    EditText ed_email, ed_password;
     Button button_dang_ky_activity;
-    String email_nhap,password_nhap;
+    String email_nhap, password_nhap;
     User user_nhap;
-    DatabaseReference mDatabase;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dang_ky);
+
         button_dang_ky_activity = (Button) findViewById(R.id.button_dang_ky_activity);
         ed_email = (EditText) findViewById(R.id.ed_email_dang_ky);
         ed_password = (EditText) findViewById(R.id.ed_password_dang_ky);
@@ -37,63 +40,21 @@ public class ActivityDangKy extends AppCompatActivity {
         button_dang_ky_activity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ed_email.getText().toString().equals("") || ed_password.getText().toString().equals("") )
-                {
-                    Toast.makeText(ActivityDangKy.this, "Nhập đầy đủ email và password đi bạn ơi", Toast.LENGTH_SHORT).show();
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference("users");
 
-                }
-                else
-                {
-//                    Log.d("fdas", "Value is: " + user_nhap);
-//                    Toast.makeText(ActivityDangKy.this, "Đổi email đi bạn , email tồn tại rồi bạn ơi", Toast.LENGTH_SHORT).show();
+                // Lấy giá trị nhập vào
+                String email = ed_email.getText().toString();
+                String password = ed_password.getText().toString();
+                User user = new User(email,password);
+                reference.child(email).setValue(user);
+//                Log.d("TAG", "onClick: ", user.getEmail());
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                v.getContext().startActivity(intent);
+                finish();
 
-
-                    email_nhap= ed_email.getText().toString();
-                    password_nhap = ed_password.getText().toString();
-                    mDatabase = FirebaseDatabase.getInstance().getReference().child("user");
-                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                        private static final String TAG = "read dataa";
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        User user_nhap = dataSnapshot.getValue(User.class);
-
-                        Log.d(TAG, "Value is: " + user_nhap);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "Failed to read value.", databaseError.toException());
-                    }
-                });
-                    if (user_nhap!=null) {
-                        if (user_nhap.getEmail().equals(email_nhap) && user_nhap.getPassword().equals(password_nhap)) {
-                           Toast.makeText(ActivityDangKy.this, "Không ", Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(v.getContext(), MainActivity.class);
-                            v.getContext().startActivity(intent);
-                            finish();
-                        } else {
-                            Toast.makeText(ActivityDangKy.this, "Đổi email đi bạn , email tồn tại rồi bạn ơi", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                    else
-                    {
-                        writeNewUser(email_nhap,email_nhap,password_nhap);
-                        Intent intent = new Intent(v.getContext(), MainActivity.class);
-                        v.getContext().startActivity(intent);
-                        Toast.makeText(ActivityDangKy.this, "Cos ", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                }
             }
         });
 
-    }
-    public void writeNewUser(String userId, String email, String password) {
-        User user = new User( email,password);
-
-        mDatabase.child("user/" + userId).setValue(user);
     }
 }

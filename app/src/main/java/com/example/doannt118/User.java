@@ -1,8 +1,6 @@
 package com.example.doannt118;
 
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
 public class User {
     public String email;
     public String password;

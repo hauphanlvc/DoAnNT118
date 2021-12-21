@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StartActivity extends AppCompatActivity {
     Button button_dang_nhap,button_dang_ky;
+    TextView tv_demo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,5 +33,7 @@ public class StartActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 }

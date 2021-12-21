@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "767476999283",
+    "firebase_url": "https://doannt118-34f7f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "doannt118-34f7f",
+    "storage_bucket": "doannt118-34f7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767476999283:android:7c4fa4bf75efa44f7ab606",
+        "android_client_info": {
+          "package_name": "com.example.doannt118"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767476999283-g1cj2rfcrpaem9dk2if84t1ni8cm0ngd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ4O0B0JKSPXEw7rmMYhhAJQIexDuH6JI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767476999283-g1cj2rfcrpaem9dk2if84t1ni8cm0ngd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
