@@ -3,6 +3,7 @@ package com.example.doannt118;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,13 +17,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Calendar;
 
 public class ActivityThe extends AppCompatActivity {
 
     EditText etDate;
     ImageView ivCalendar;
-    TextView tvTieuDe,tvMota;
+    TextView tvTieuDe,tvMota, tvNhan;
+    FloatingActionButton red,blue,yellow,green;
+    boolean isAllFabsVisible;
+    View ViewTieuDe;
     DatePickerDialog.OnDateSetListener setListener;
 
     @Override
@@ -34,6 +40,8 @@ public class ActivityThe extends AppCompatActivity {
         ivCalendar = findViewById(R.id.ivCalendar);
         tvTieuDe = findViewById(R.id.tvTieuDe);
         tvMota = findViewById(R.id.tvMota);
+        ViewTieuDe=findViewById(R.id.ViewTieuDe);
+        addColorButton();
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -133,5 +141,65 @@ public class ActivityThe extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addColorButton() {
+        isAllFabsVisible=false;
+        red = findViewById(R.id.fabRed);
+        blue = findViewById(R.id.fabBlue);
+        yellow = findViewById(R.id.fabYellow);
+        green = findViewById(R.id.fabGreen);
+        tvNhan=findViewById(R.id.tvNhan);
+        red.setVisibility(View.GONE);
+        yellow.setVisibility(View.GONE);
+        blue.setVisibility(View.GONE);
+        green.setVisibility(View.GONE);
+
+        tvNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isAllFabsVisible)
+                {
+                    red.show();
+                    blue.show();
+                    yellow.show();
+                    green.show();
+                    isAllFabsVisible=true;
+                }
+                else
+                {
+                    red.hide();
+                    blue.hide();
+                    yellow.hide();
+                    green.hide();
+                    isAllFabsVisible=false;
+                }
+
+                red.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ViewTieuDe.setBackgroundColor(Color.parseColor("#FF0000"));
+                    }
+                });
+                blue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ViewTieuDe.setBackgroundColor(Color.parseColor("#ADD8E6"));
+                    }
+                });
+                yellow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ViewTieuDe.setBackgroundColor(Color.parseColor("#FFA500"));
+                    }
+                });
+                green.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ViewTieuDe.setBackgroundColor(Color.parseColor("#008080"));
+                    }
+                });
+            }
+        });
     }
 }

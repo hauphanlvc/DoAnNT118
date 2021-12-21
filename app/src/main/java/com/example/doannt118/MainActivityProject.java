@@ -15,7 +15,7 @@ public class MainActivityProject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_activity);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Project");
+        actionBar.setTitle("Danh sách");
         //String title = actionBar.getTitle().toString();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
