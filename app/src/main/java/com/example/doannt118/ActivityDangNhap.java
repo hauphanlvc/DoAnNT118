@@ -25,7 +25,6 @@ public class ActivityDangNhap extends AppCompatActivity {
     Button button_dang_nhap_activity;
     String userId,email_true,password_true,email_nhap,password_nhap;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

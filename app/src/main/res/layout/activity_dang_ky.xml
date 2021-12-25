@@ -6,55 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".ActivityDangNhap">
 
+    <EditText
+        android:id="@+id/ed_password_dang_ky"
+        android:layout_width="352dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/inputext"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_password_dang_ky"
+        app:layout_constraintTop_toBottomOf="@+id/tv_password_dang_ky" />
+
     <TextView
         android:id="@+id/tv_email_dang_ky"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="16dp"
         android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/ed_email_dang_ky"
         app:layout_constraintStart_toStartOf="@+id/ed_email_dang_ky" />
+
+    <EditText
+        android:id="@+id/ed_email_dang_ky"
+        android:layout_width="352dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="124dp"
+        android:background="@drawable/inputext"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Email address"
+        android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/ed_confirm_password_dang_ky"
+        android:layout_width="352dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/inputext"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_confirm_password"
+        app:layout_constraintTop_toBottomOf="@+id/tv_confirm_password" />
 
     <TextView
         android:id="@+id/tv_password_dang_ky"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="20dp"
         android:text="Password"
         app:layout_constraintStart_toStartOf="@+id/ed_email_dang_ky"
         app:layout_constraintTop_toBottomOf="@+id/ed_email_dang_ky" />
-
-    <EditText
-        android:id="@+id/ed_email_dang_ky"
+    <TextView
+        android:id="@+id/tv_confirm_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="121dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/ed_password_dang_ky"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/tv_password_dang_ky"
-        app:layout_constraintTop_toBottomOf="@+id/tv_password_dang_ky" />
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="20dp"
+        android:text="Confirm Password"
+        app:layout_constraintStart_toStartOf="@+id/ed_password_dang_ky"
+        app:layout_constraintTop_toBottomOf="@+id/ed_password_dang_ky" />
 
     <Button
         android:id="@+id/button_dang_ky_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="21dp"
-        android:text="Đăng ký "
-        app:layout_constraintEnd_toEndOf="@+id/ed_password_dang_ky"
+        android:layout_width="195dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="176dp"
+        android:background="@drawable/button"
+        android:text="Đăng ký"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_password_dang_ky" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

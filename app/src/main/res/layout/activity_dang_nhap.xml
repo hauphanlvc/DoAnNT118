@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDangNhap">
+    tools:context=".ActivityDangNhap"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="48dp">
 
     <TextView
         android:id="@+id/tv_email_dang_nhap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="12dp"
         android:text="Email"
         app:layout_constraintBottom_toTopOf="@+id/ed_email_dang_nhap"
         app:layout_constraintStart_toStartOf="@+id/ed_email_dang_nhap" />
@@ -21,40 +23,67 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="24dp"
         android:text="Password"
         app:layout_constraintStart_toStartOf="@+id/ed_email_dang_nhap"
         app:layout_constraintTop_toBottomOf="@+id/ed_email_dang_nhap" />
 
     <EditText
         android:id="@+id/ed_email_dang_nhap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="121dp"
+        android:layout_width="352dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/inputext"
+        android:drawablePadding="12dp"
         android:ems="10"
+        android:hint="Email address"
         android:inputType="textEmailAddress"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/ed_password_dang_nhap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_width="352dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/inputext"
+        android:drawablePadding="12dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/tv_password_dang_nhap"
         app:layout_constraintTop_toBottomOf="@+id/tv_password_dang_nhap" />
 
     <Button
         android:id="@+id/button_dang_nhap_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="21dp"
+        android:layout_width="195dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/button"
         android:text="Đăng nhập "
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/ed_password_dang_nhap"
         app:layout_constraintTop_toBottomOf="@+id/ed_password_dang_nhap" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:textColor="#000000"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/ed_email_dang_nhap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
