@@ -101,7 +101,8 @@
         android:layout_height="40dp"
         android:layout_weight="1"
         android:scaleType="centerInside"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
