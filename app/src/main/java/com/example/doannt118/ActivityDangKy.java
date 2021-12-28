@@ -49,7 +49,7 @@ public class ActivityDangKy extends AppCompatActivity {
                 User user = new User(email,password);
                 reference.child(email).setValue(user);
 //                Log.d("TAG", "onClick: ", user.getEmail());
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                Intent intent = new Intent(v.getContext(), ActivityDangNhap.class);
                 v.getContext().startActivity(intent);
                 finish();
 

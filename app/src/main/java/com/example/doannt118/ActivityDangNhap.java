@@ -38,6 +38,9 @@ public class ActivityDangNhap extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser(v);
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                v.getContext().startActivity(intent);
+                finish();
             }
         });
 //        mDatabase = FirebaseDatabase.getInstance().getReference();
