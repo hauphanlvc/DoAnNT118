@@ -32,7 +32,6 @@ public class ActivityDangNhap extends AppCompatActivity {
         button_dang_nhap_activity = (Button) findViewById(R.id.button_dang_nhap_activity);
         ed_email = (EditText) findViewById(R.id.ed_email_dang_nhap);
         ed_password = (EditText) findViewById(R.id.ed_password_dang_nhap);
-
         password_nhap = ed_password.getText().toString();
         button_dang_nhap_activity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +42,17 @@ public class ActivityDangNhap extends AppCompatActivity {
                 finish();
             }
         });
+        findViewById(R.id.exit_login).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(v.getContext(), StartActivity.class);
+                v.getContext().startActivity(intent);
+                finish();
+            }
+        });
+
 //        mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }

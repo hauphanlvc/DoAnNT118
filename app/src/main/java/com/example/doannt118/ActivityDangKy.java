@@ -55,6 +55,16 @@ public class ActivityDangKy extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.exit_signin).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(v.getContext(), StartActivity.class);
+                v.getContext().startActivity(intent);
+                finish();
+            }
+        });
 
     }
 }

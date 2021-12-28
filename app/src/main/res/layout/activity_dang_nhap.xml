@@ -86,4 +86,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/exit_login"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:scaleType="centerInside"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
