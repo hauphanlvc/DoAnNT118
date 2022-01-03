@@ -1,5 +1,6 @@
 package com.example.doannt118;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -7,10 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     RecyleViewDanhSachDuAn adapter;
     DatabaseReference mFirebaseDatabase;
     FirebaseDatabase mFirebaseInstance;
+    AlertDialog.Builder diaglogDangXuat;
     // kiểm tra nút add có đang nhấn hay không
     String userId;
     Boolean isAllFabsVisible;
@@ -46,9 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        // Write a message to the database
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("user");
+
 
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -72,33 +74,51 @@ public class MainActivity extends AppCompatActivity {
 
         AddTaskButton();
         HienThiTenDuAn();
+        DangXuat();
 
-        // Read from the database
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            private static final String TAG = "read data";
-//
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//                Log.d(TAG, "Value is: " + value);
-//                tenDuAns.add(new TenDuAn(value));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
         mFirebaseInstance = FirebaseDatabase.getInstance();
 
         // get reference to 'users' node
         mFirebaseDatabase = mFirebaseInstance.getReference("users");
     }
-
-
+    public void DangXuat()
+    {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                       int id = menuItem.getItemId();
+                       if (id == R.id.menuLogOut)
+                       {
+                           diaglogDangXuat.setMessage("Bạn có muốn đăng xuất không? ")
+                                   .setCancelable(false)
+                                   .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialog, int which) {
+                                           Intent intent = new Intent(MainActivity.this,StartActivity.class);
+                                           startActivity(intent);
+                                           finish();
+                                       }
+                                   })
+                                   .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                       public void onClick(DialogInterface dialog, int id) {
+                                           //  Action for 'NO' Button
+                                           dialog.cancel();
+                                           Toast.makeText(getApplicationContext(),"Bạn chọn không xóa ",
+                                                   Toast.LENGTH_SHORT).show();
+                                       }
+                                   });
+                           AlertDialog alert = diaglogDangXuat.create();
+                           alert.show();
+                       }
+                       else if (id == R.id.menuSettings)
+                       {
+                           Toast.makeText(MainActivity.this, "Chọn Settings ", Toast.LENGTH_SHORT).show();
+                       }
+                        return true;
+                    }
+                });
+    }
     public void HienThiTenDuAn()
     {
 

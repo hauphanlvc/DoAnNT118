@@ -162,6 +162,7 @@
         android:id="@+id/design_navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/header_navigation_view"
         app:menu="@menu/nagivation_menu"
         android:layout_gravity = 'start'/>

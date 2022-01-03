@@ -37,9 +37,7 @@ public class ActivityDangNhap extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loginUser(v);
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                v.getContext().startActivity(intent);
-                finish();
+
             }
         });
         findViewById(R.id.exit_login).setOnClickListener(new View.OnClickListener()
@@ -53,7 +51,7 @@ public class ActivityDangNhap extends AppCompatActivity {
             }
         });
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
     }
     public Boolean validateUsername()
