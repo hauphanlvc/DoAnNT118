@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="5dp"
-    android:background="#FF99FF">
+    android:background="#3399FF">
 
     <TextView
         android:id="@+id/tvName"
@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:text="Danh sách 1"
-        android:background="#FF66FF"
+        android:background="#3366FF"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
