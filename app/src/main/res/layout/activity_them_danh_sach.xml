@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="#00CCFF"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:text="THÊM DANH SÁCH"/>
+
+    <EditText
+        android:id="@+id/Danh_sach"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textColor="#000000"
+        android:textSize="17dp"
+        android:hint="Tên danh sách"/>
+
+</LinearLayout>

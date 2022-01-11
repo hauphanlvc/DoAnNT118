@@ -12,11 +12,26 @@
         android:layout_height="30dp"
         android:gravity="center_vertical"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
         android:textSize="20dp"
         android:text="Danh sách 1"
         android:background="#FF66FF"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Ds_The"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <Button
+        android:id="@+id/tv_them_the"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:text="thêm thẻ"
+        >
+
+    </Button>
 
 
 </LinearLayout>
