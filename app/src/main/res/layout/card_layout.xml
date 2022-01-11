@@ -72,8 +72,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ViewMota"
-                android:src="@drawable/tag_icon"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:src="@drawable/tag_icon">
 
             </ImageView>
 
@@ -84,8 +84,7 @@
                 android:layout_below="@+id/tvNhan"
                 android:layout_toRightOf="@+id/ivThanhvien"
                 android:padding="15dp"
-                android:text="Thành viên">
-            </TextView>
+                android:text="Thành viên"></TextView>
 
             <ImageView
                 android:id="@+id/ivThanhvien"
@@ -137,12 +136,13 @@
                 android:text="Danh sách công việc">
 
             </TextView>
+
             <ImageView
                 android:id="@+id/ivDeadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_below="@id/tvDeadline"
+                android:padding="10dp"
                 android:src="@drawable/ic_task">
 
             </ImageView>
@@ -154,15 +154,15 @@
                 android:layout_below="@+id/tvTasklist"
                 android:layout_toRightOf="@+id/ivFile"
                 android:padding="15dp"
-                android:text="File đính kèm">
-            </TextView>
+                android:text="File đính kèm"></TextView>
+
             <ImageView
                 android:id="@+id/ivFile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_attach_file"
+                android:layout_below="@id/tvTasklist"
                 android:padding="10dp"
-                android:layout_below="@id/tvTasklist">
+                android:src="@drawable/ic_attach_file">
 
             </ImageView>
 

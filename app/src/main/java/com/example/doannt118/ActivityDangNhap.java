@@ -106,7 +106,7 @@ public class ActivityDangNhap extends AppCompatActivity {
         password_nhap = ed_password.getText().toString();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = reference.orderByChild("email").equalTo(email_nhap);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+        checkUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -118,7 +118,7 @@ public class ActivityDangNhap extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.putExtra("email", emailFromDB);
-                        intent.putExtra("passsword", passwordFromDB);
+//                        intent.putExtra("passsword", passwordFromDB);
                         startActivity(intent);
 
                     } else {

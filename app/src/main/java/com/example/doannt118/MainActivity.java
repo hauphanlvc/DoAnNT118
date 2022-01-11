@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     // kiểm tra nút add có đang nhấn hay không
     String userId;
     Boolean isAllFabsVisible;
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -71,15 +72,18 @@ public class MainActivity extends AppCompatActivity {
                 view.getContext().startActivity(intent);
             }
         });
+        // Lấy email từ login
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
 
         AddTaskButton();
         HienThiTenDuAn();
         DangXuat();
-
-        mFirebaseInstance = FirebaseDatabase.getInstance();
-
-        // get reference to 'users' node
-        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+//
+//        mFirebaseInstance = FirebaseDatabase.getInstance();
+//
+//        // get reference to 'users' node
+//        mFirebaseDatabase = mFirebaseInstance.getReference("users");
     }
     public void DangXuat()
     {
@@ -123,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
     {
 
 
-        tenDuAns.add(new TenDuAn("du an 2"));
-        tenDuAns.add(new TenDuAn("du an 123213"));
+//        tenDuAns.add(new TenDuAn("du an 2"));
+//        tenDuAns.add(new TenDuAn("du an 123213"));
         RecyclerView ListProject = (RecyclerView) findViewById(R.id.ListProject);
         adapter = new RecyleViewDanhSachDuAn(tenDuAns,this);
         ListProject.setHasFixedSize(true);
@@ -194,7 +198,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 //                        Toast.makeText(MainActivity.this, "thêm dự án  nào ", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
                         Intent intent = new Intent(v.getContext(), Activity_them_du_an.class);
+                        intent.putExtra("email", email);
                         v.getContext().startActivity(intent);
                     }
                 });
