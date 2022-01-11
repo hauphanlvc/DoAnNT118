@@ -78,7 +78,7 @@ public class Activity_them_du_an extends AppCompatActivity {
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
         Query update_project_list = reference.orderByChild("email").equalTo(email);
-        ArrayList<String> old_project_list = new ArrayList<String>();
+        ArrayList<String>[] old_project_list = new ArrayList[]{new ArrayList<String>()};
         update_project_list.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

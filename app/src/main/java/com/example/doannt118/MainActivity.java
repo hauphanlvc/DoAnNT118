@@ -26,16 +26,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout; // layout chính của board
     NavigationView navigationView;
-    ArrayList<TenDuAn> tenDuAns = new ArrayList<TenDuAn>();
+    ArrayList<TenDuAn> tenDuAns;
     FloatingActionButton fabAddTask,fabAdd,fabAddProject;
     TextView tvAddCard,tvAddProject;
     RecyleViewDanhSachDuAn adapter;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     String userId;
     Boolean isAllFabsVisible;
     String email;
+    List<User> messages ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,10 +80,11 @@ public class MainActivity extends AppCompatActivity {
         // Lấy email từ login
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
-
+        tenDuAns = new ArrayList<TenDuAn>();
         AddTaskButton();
         HienThiTenDuAn();
         DangXuat();
+
 //
 //        mFirebaseInstance = FirebaseDatabase.getInstance();
 //
@@ -123,12 +129,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void HienThiTenDuAn()
-    {
-
-
-//        tenDuAns.add(new TenDuAn("du an 2"));
-//        tenDuAns.add(new TenDuAn("du an 123213"));
+//    public void getAllEmail(Map<String,Object> user)
+    public void printResult(){
+        Log.d("TAG", "printResult: "+tenDuAns.toString());
         RecyclerView ListProject = (RecyclerView) findViewById(R.id.ListProject);
         adapter = new RecyleViewDanhSachDuAn(tenDuAns,this);
         ListProject.setHasFixedSize(true);
@@ -137,16 +140,47 @@ public class MainActivity extends AppCompatActivity {
         ListProject.setLayoutManager(linearLayoutManager);
         adapter.setOnItemClickListener(new RecyleViewDanhSachDuAn.onClickListner() {
             private static final String TAG = "adapter";
-
             @Override
             public void onItemClick(int position, View v) {
                 Toast.makeText(MainActivity.this, "chọn dự án ", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void HienThiTenDuAn()
+    {
 
+        //Get datasnapshot at your "users" root node
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot datas: dataSnapshot.getChildren()){
+//                    Log.d("TAG", datas..toString());
+                    Log.d("TAG", datas.getRef().toString());
+//                    Log.d("Tag",);
+
+                    if (datas.getValue(User.class).getEmail()!= null)
+                    {
+                        Log.d("Tag",datas.getValue(User.class).getEmail());
+                        Log.d("Tag", "ko null");
+                        tenDuAns.add(new TenDuAn(datas.getValue(User.class).getEmail()));
+                    }
+                    else
+                    {
+                        Log.d("Tag", "null");
+                    }
+                    Log.d("TAG", "onDataChange: " + tenDuAns.toString());
+                    printResult();
+                }
 
             }
-
-
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
+
+
     }
 
     public void AddTaskButton()
