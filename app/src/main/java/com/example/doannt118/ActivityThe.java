@@ -41,7 +41,7 @@ public class ActivityThe extends AppCompatActivity {
         tvTieuDe = findViewById(R.id.tvTieuDe);
         tvMota = findViewById(R.id.tvMota);
         ViewTieuDe=findViewById(R.id.ViewTieuDe);
-        addColorButton();
+//        addColorButton();
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);

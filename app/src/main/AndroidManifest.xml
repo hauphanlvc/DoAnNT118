@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoAnNT118">
         <activity
+            android:name=".ActivityTheHau"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
             android:name=".ActivityDangKy"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -39,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activity_them_du_an"
             android:parentActivityName=".MainActivity"
@@ -63,9 +69,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NotificationsActivity"
             android:parentActivityName=".MainActivity"
@@ -78,6 +82,7 @@
         </activity>
         <activity
             android:name=".MainActivityProject"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
@@ -87,6 +92,7 @@
         </activity>
         <activity
             android:name=".ActivityThe"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
