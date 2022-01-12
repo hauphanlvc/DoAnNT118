@@ -8,64 +8,43 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.doannt118.Class.CongViec;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ActivityTheHau extends AppCompatActivity {
-    EditText etDate;
-    ImageView ivCalendar;
-    TextView tvTieuDe,tvMota, tvNhan;
-    FloatingActionButton red,blue,yellow,green;
-    boolean isAllFabsVisible;
-    View ViewTieuDe;
-    DatePickerDialog.OnDateSetListener setListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_hau);
-//        SetGridView();
+        // Danh sách nhãn
+        Spinner spinner = (Spinner) findViewById(R.id.sp_nhan);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        DanhSachCongViec();
     }
-//    public void SetGridView()
-//    {
-//        ArrayList<String> danh_sach_nhan = new ArrayList<>();
-//        danh_sach_nhan.add("1");
-//        danh_sach_nhan.add("2");
-//        danh_sach_nhan.add("3");
-//        danh_sach_nhan.add("44234");
-//        GridView gr_danh_sach_nhan = (GridView) findViewById(R.id.gv_danh_sach_nhan);
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,danh_sach_nhan)
-//        {
-//            @Override
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                View view = super.getView(position, convertView, parent);
-//                Log.d("TAG", "getView: "+position);
-//                switch (position){
-//                    case 0:
-//                        view.setBackgroundColor(getResources().getColor(R.color.LightBlue));
-//                        break;
-//                    case 1:
-//                        view.setBackgroundColor(getResources().getColor(R.color.Yellow));
-//                        break;
-//                    default:
-//                        view.setBackgroundColor(getResources().getColor(R.color.Red));
-//
-//                };
-//
-//                return view;
-//            }
-//        };
-//
-//        gr_danh_sach_nhan.setAdapter(arrayAdapter);
-//
-//    }
 
+    public void DanhSachCongViec()
+    {
+
+    }
 }

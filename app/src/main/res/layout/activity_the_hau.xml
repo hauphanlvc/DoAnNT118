@@ -7,13 +7,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="115dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/LightBlue"
-        app:layout_constraintBottom_toTopOf="@+id/ed_mo_ta_the"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -101,23 +97,124 @@
         app:layout_constraintTop_toBottomOf="@+id/ed_mo_ta_the"
         app:srcCompat="@drawable/tag_icon" />
 
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/ln_gridview"-->
-    <!--        android:layout_width="367dp"-->
-    <!--        android:layout_height="54dp"-->
-    <!--        android:layout_marginStart="8dp"-->
-    <!--        android:layout_marginTop="56dp"-->
-    <!--        android:visibility="gone"-->
-    <!--        android:layout_marginEnd="8dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toEndOf="@+id/im_nhan"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/ed_mo_ta_the">-->
+    <Spinner
+        android:id="@+id/sp_nhan"
+        android:layout_width="342dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/im_nhan"
+        app:layout_constraintTop_toBottomOf="@+id/ed_mo_ta_the" />
 
-    <!--        <GridView-->
-    <!--            android:id="@+id/gv_danh_sach_nhan"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:orientation="horizontal" />-->
-    <!--    </LinearLayout>-->
+    <ImageView
+        android:id="@+id/iv_thanh_vien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_user"
+        app:layout_constraintStart_toStartOf="@+id/im_nhan"
+        app:layout_constraintTop_toBottomOf="@+id/sp_nhan" />
+
+    <TextView
+        android:id="@+id/tv_thanh_vien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="Thành viên"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_thanh_vien"
+        app:layout_constraintTop_toBottomOf="@+id/sp_nhan" />
+
+    <ImageView
+        android:id="@+id/iv_ngay_het_han"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/iv_thanh_vien"
+        app:layout_constraintTop_toBottomOf="@+id/tv_thanh_vien"
+        app:srcCompat="@drawable/calendar_icon" />
+
+    <TextView
+        android:id="@+id/tv_ngay_het_han"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:text="Ngày hết hạn"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_ngay_het_han"
+        app:layout_constraintStart_toEndOf="@+id/iv_ngay_het_han"
+        app:layout_constraintTop_toBottomOf="@+id/tv_thanh_vien">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/tv_show_deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+
+        app:layout_constraintStart_toEndOf="@+id/tv_ngay_het_han"
+        app:layout_constraintTop_toBottomOf="@+id/tv_thanh_vien" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_task"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="333dp" />
+
+    <TextView
+        android:id="@+id/tv_danh_sach_cong_viec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Danh sách công việc"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="339dp" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="28dp"
+        android:layout_height="22dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_danh_sach_cong_viec"
+        app:layout_constraintTop_toTopOf="@+id/tv_danh_sach_cong_viec"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/arrow_down_float"
+        tools:layout_editor_absoluteX="242dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="302dp"
+
+        android:layout_height="203dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_danh_sach_cong_viec"
+        tools:layout_editor_absoluteX="56dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="189dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Thêm công việc "
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:srcCompat="@android:drawable/ic_menu_add"
+        tools:layout_editor_absoluteX="281dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
