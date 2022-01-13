@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/back_danh_sach"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/icon_back"
             app:layout_constraintBottom_toBottomOf="parent"
