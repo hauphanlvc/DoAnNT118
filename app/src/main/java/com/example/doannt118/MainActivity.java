@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position, View v) {
                 Toast.makeText(MainActivity.this, "chọn dự án ", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(v.getContext(),  ActivityTheHau.class);
+                Intent intent = new Intent(v.getContext(),  NotificationsActivity.class);
                 v.getContext().startActivity(intent);
 
             }
