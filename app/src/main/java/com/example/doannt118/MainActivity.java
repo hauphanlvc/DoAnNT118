@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fabAddTask,fabAdd,fabAddProject;
     TextView tvAddCard,tvAddProject;
     RecyleViewDanhSachDuAn adapter;
-    DatabaseReference mFirebaseDatabase;
-    FirebaseDatabase mFirebaseInstance;
+
     AlertDialog.Builder diaglogDangXuat;
     // kiểm tra nút add có đang nhấn hay không
     String userId;
     Boolean isAllFabsVisible;
     String email;
+
     List<User> messages ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
 //    public void getAllEmail(Map<String,Object> user)
     public void printResult(){
+
         Log.d("TAG", "printResult: "+tenDuAns.toString());
         RecyclerView ListProject = (RecyclerView) findViewById(R.id.ListProject);
         adapter = new RecyleViewDanhSachDuAn(tenDuAns,this);
@@ -144,44 +145,50 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position, View v) {
                 Toast.makeText(MainActivity.this, "chọn dự án ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(),  MainActivityProject.class);
+                intent.putExtra("email", email);
+                intent.putExtra("project_name",tenDuAns.get(position).getTen_Du_An());
+
                 v.getContext().startActivity(intent);
 
             }
         });
     }
+
+
     public void HienThiTenDuAn()
     {
-
-        //Get datasnapshot at your "users" root node
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot datas: dataSnapshot.getChildren()){
-//                    Log.d("TAG", datas..toString());
-                    Log.d("TAG", datas.getRef().toString());
-//                    Log.d("Tag",);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tenDuAns.clear();
+                ArrayList<String> list_project = new ArrayList<String>();
+                for (DataSnapshot datas: dataSnapshot.getChildren())
+                {
 
-                    if (datas.getValue(User.class).getEmail()!= null)
+                    for (DataSnapshot datas_1 : datas.child("member_of_project").getChildren())
                     {
-                        Log.d("Tag",datas.getValue(User.class).getEmail());
-                        Log.d("Tag", "ko null");
-                        tenDuAns.add(new TenDuAn(datas.getValue(User.class).getEmail()));
+//                        tenDuAns.add(new TenDuAn(datas_1.child("email_member").getValue(String.class)));
+                        list_project.add(datas_1.child("email_member").getValue(String.class));
+
                     }
-                    else
+                    if (list_project.contains(email))
                     {
-                        Log.d("Tag", "null");
+                        tenDuAns.add(new TenDuAn(datas.child("project_name").getValue(String.class)));
                     }
-                    Log.d("TAG", "onDataChange: " + tenDuAns.toString());
-                    printResult();
                 }
 
+
+                Log.d("TAG", "getListProject: "+ tenDuAns.toString());
+                printResult();
             }
+
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
 
 
     }

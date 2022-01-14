@@ -57,7 +57,6 @@ public class Activity_them_du_an extends AppCompatActivity {
                 {
 //                    Toast.makeText(Activity_them_du_an.this, "oke rồi nhen", Toast.LENGTH_SHORT).show();
                     ThemProject(TenDuAn);
-                    ThemProjectVaoUser(TenDuAn);
 
                     onBackPressed();
 
@@ -68,36 +67,12 @@ public class Activity_them_du_an extends AppCompatActivity {
     }
     public void ThemProject(String TenDuAn)
     {
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("project");
-        reference.child(TenDuAn).setValue(true);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+        reference.child(TenDuAn).child("member_of_project").child(email).child("email_member").setValue(email);
+        reference.child(TenDuAn).child("project_name").setValue(TenDuAn);
+
+
 
     }
-    public void ThemProjectVaoUser(String TenDuAn)
-    {
-        rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("users");
-        Query update_project_list = reference.orderByChild("email").equalTo(email);
-        ArrayList<String>[] old_project_list = new ArrayList[]{new ArrayList<String>()};
-        update_project_list.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    User test = dataSnapshot.getValue(User.class);
 
-                }
-//                else
-//                {
-//
-//                }
-
-//        reference.child(email).child("project_list").setValue()
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 }

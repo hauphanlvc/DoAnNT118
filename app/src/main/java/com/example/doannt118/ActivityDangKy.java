@@ -46,7 +46,7 @@ public class ActivityDangKy extends AppCompatActivity {
                 // Lấy giá trị nhập vào
                 String email = ed_email.getText().toString();
                 String password = ed_password.getText().toString();
-                User user = new User(email,password,null);
+                User user = new User(email,password);
                 reference.child(email).setValue(user);
 //                Log.d("TAG", "onClick: ", user.getEmail());
                 Intent intent = new Intent(v.getContext(), ActivityDangNhap.class);

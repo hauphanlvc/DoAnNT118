@@ -51,6 +51,7 @@
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.215625" />
         <entry key="app/src/main/res/drawable/ic_notifications.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/drawable/ic_settings_black.xml" value="0.37447916666666664" />
+        <entry key="app/src/main/res/drawable/shape.xml" value="0.215625" />
         <entry key="app/src/main/res/layout-v31/boards.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/activity_board.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/activity_dang_ky.xml" value="0.1875" />
@@ -59,6 +60,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2368659420289855" />
         <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/activity_task_list.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/activity_the_hau.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_them_danh_sach.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_them_du_an.xml" value="0.1875" />
@@ -74,6 +76,7 @@
         <entry key="app/src/main/res/layout/layout_project_item.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.22192028985507245" />
         <entry key="app/src/main/res/layout/project_activity.xml" value="0.24320652173913043" />
+        <entry key="app/src/main/res/layout/shape.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/menu/card_menu.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/menu/main.xml" value="0.35833333333333334" />
