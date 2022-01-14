@@ -1,47 +1,45 @@
 package com.example.doannt118;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivityProject extends AppCompatActivity {
 
+    ImageView back;
+    FloatingActionButton addDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_activity);
 
+        back = findViewById(R.id.back_danh_sach);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( MainActivityProject.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        addDs = (FloatingActionButton) findViewById(R.id.add_ds);
+        addDs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( MainActivityProject.this, Activity_them_danh_sach.class);
+                startActivity(intent);
+            }
+        });
 
     }
-  /*  @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_project, menu);
-        return true;
-   }
-   @Override
-   public boolean onOptionsItemSelected(MenuItem item) {
-   switch (item.getItemId())
-       {
-           case android.R.id.home:
-               onBackPressed();
-               return true;
-            case R.id.menu1:
-               //code xử lý khi bấm menu1
-             break;
-            case R.id.menu2:
-                //code xử lý khi bấm menu2
-                break;
-           case R.id.menu3:
-               //code xử lý khi bấm menu3
-               break;
-           default:break;
-       }
 
-       return super.onOptionsItemSelected(item);
-    }*/
 }
