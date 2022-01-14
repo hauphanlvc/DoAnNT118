@@ -16,8 +16,8 @@
             android:id="@+id/iv_hoan_thanh_the"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/complete" />
@@ -151,8 +151,8 @@
 
     <TextView
         android:id="@+id/tv_show_deadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="33dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
 
@@ -163,28 +163,32 @@
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_task"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="333dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ngay_het_han"
+        app:srcCompat="@drawable/ic_task" />
 
     <TextView
         android:id="@+id/tv_danh_sach_cong_viec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="Danh sách công việc"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="339dp" />
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="28dp"
         android:layout_height="22dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_danh_sach_cong_viec"
+        app:layout_constraintStart_toEndOf="@+id/tv_danh_sach_cong_viec"
         app:layout_constraintTop_toTopOf="@+id/tv_danh_sach_cong_viec"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/arrow_down_float"
-        tools:layout_editor_absoluteX="242dp" />
+        app:srcCompat="@android:drawable/arrow_down_float" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -208,13 +212,15 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/iv_them_cong_viec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        tools:layout_editor_absoluteX="281dp" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

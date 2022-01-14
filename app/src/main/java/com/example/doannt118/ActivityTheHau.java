@@ -40,9 +40,33 @@ public class ActivityTheHau extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        NgayHetHan();
         DanhSachCongViec();
     }
-
+    public void NgayHetHan()
+    {
+        DatePickerDialog.OnDateSetListener setListener;
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+        TextView tv_ngay_het_han = (TextView) findViewById(R.id.tv_ngay_het_han);
+        TextView tv_show_deadline = (TextView) findViewById(R.id.tv_show_deadline);
+        tv_ngay_het_han.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityTheHau.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month=month+1;
+                        String date = day+"/"+month+"/"+year;
+                        tv_show_deadline.setText(date);
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
+        });
+    }
     public void DanhSachCongViec()
     {
 
