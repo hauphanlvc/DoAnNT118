@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/CadetBlue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,18 +24,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back_danh_sach"
+            android:id="@+id/back_danh_sach_the"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/icon_back"
+            android:src="?attr/actionModeCloseDrawable"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
         <TextView
-            android:id="@+id/boards_danh_sach"
+            android:id="@+id/boards_danh_sach_the"
             android:layout_width="143dp"
             android:layout_height="27dp"
             android:layout_marginStart="10dp"
@@ -42,9 +43,9 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/back_danh_sach"
-            app:layout_constraintStart_toEndOf="@+id/back_danh_sach"
-            app:layout_constraintTop_toTopOf="@+id/back_danh_sach" />
+            app:layout_constraintBottom_toBottomOf="@+id/back_danh_sach_the"
+            app:layout_constraintStart_toEndOf="@+id/back_danh_sach_the"
+            app:layout_constraintTop_toTopOf="@+id/back_danh_sach_the" />
 
         <ImageView
             android:id="@+id/notification_danh_sach"
@@ -55,7 +56,7 @@
             android:contentDescription="noficication symbol"
             android:src="@drawable/ic_notifications"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/boards_danh_sach"
+            app:layout_constraintStart_toEndOf="@+id/boards_danh_sach_the"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
@@ -70,7 +71,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/iv_hoan_thanh_tao_danh_sach_task"
+            android:id="@+id/iv_navigation_view"
             android:layout_width="25dp"
             android:layout_height="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -82,7 +83,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/List_danh_sach"
+            android:id="@+id/List_danh_sach_the"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -96,19 +97,20 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <EditText
-            android:id="@+id/ed_them_danh_sach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/ed_them_the"
+            android:layout_width="219dp"
+            android:layout_height="52dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:background="@drawable/shape"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="Thêm danh sách "
+            android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/List_danh_sach" />
+            app:layout_constraintTop_toBottomOf="@+id/List_danh_sach_the" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_them_danh_sach"
+            android:id="@+id/fab_them_the"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -119,10 +121,10 @@
             android:contentDescription="nút thêm"
             android:focusable="true"
             app:backgroundTint="@color/LightBlue"
-            app:layout_constraintBottom_toBottomOf="@+id/ed_them_danh_sach"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_them_the"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ed_them_danh_sach"
-            app:layout_constraintTop_toTopOf="@+id/ed_them_danh_sach"
+            app:layout_constraintStart_toEndOf="@+id/ed_them_the"
+            app:layout_constraintTop_toTopOf="@+id/ed_them_the"
             app:srcCompat="@android:drawable/ic_input_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

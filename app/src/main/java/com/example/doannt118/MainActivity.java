@@ -165,13 +165,14 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> list_project = new ArrayList<String>();
                 for (DataSnapshot datas: dataSnapshot.getChildren())
                 {
-
+                    list_project.clear();
                     for (DataSnapshot datas_1 : datas.child("member_of_project").getChildren())
                     {
 //                        tenDuAns.add(new TenDuAn(datas_1.child("email_member").getValue(String.class)));
                         list_project.add(datas_1.child("email_member").getValue(String.class));
-
+                        Log.d("TAG", datas_1.child("email_member").getRef().toString());
                     }
+
                     if (list_project.contains(email))
                     {
                         tenDuAns.add(new TenDuAn(datas.child("project_name").getValue(String.class)));

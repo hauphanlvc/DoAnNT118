@@ -1,13 +1,8 @@
 package com.example.doannt118;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,11 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,9 +44,9 @@ public class MainActivityProject extends AppCompatActivity {
     }
     public void CacThaoTacTrenThanhBar()
     {
-        TextView tv_boards_danh_sach = (TextView) findViewById(R.id.boards_danh_sach);
+        TextView tv_boards_danh_sach = (TextView) findViewById(R.id.boards_danh_sach_the);
         tv_boards_danh_sach.setText(project_name);
-        ImageView im_back_danh_sach = (ImageView) findViewById(R.id.back_danh_sach);
+        ImageView im_back_danh_sach = (ImageView) findViewById(R.id.back_danh_sach_the);
         im_back_danh_sach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +58,7 @@ public class MainActivityProject extends AppCompatActivity {
     public void printResult()
     {
         Log.d("TAG", "printResult: "+tenDanhSachTasks.toString());
-        RecyclerView ListDanhSachTask = (RecyclerView) findViewById(R.id.List_danh_sach);
+        RecyclerView ListDanhSachTask = (RecyclerView) findViewById(R.id.List_danh_sach_the);
         adapter = new RVTenDanhSachTask(tenDanhSachTasks,this);
         ListDanhSachTask.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -78,7 +69,7 @@ public class MainActivityProject extends AppCompatActivity {
             @Override
             public void onItemClick(int position, View v) {
                 Toast.makeText(MainActivityProject.this, "chọn dự án ", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(v.getContext(),  ActivityTheHau.class);
+                Intent intent = new Intent(v.getContext(),  TaskList.class);
                 intent.putExtra("email", email);
                 intent.putExtra("project_name",project_name);
                 intent.putExtra("task_list_name",tenDanhSachTasks.get(position).getTen_danh_sach_task());
@@ -119,10 +110,10 @@ public class MainActivityProject extends AppCompatActivity {
     }
     public void ThemDanhSachTask()
     {
-        EditText ed_them_danh_sach = (EditText) findViewById(R.id.ed_them_danh_sach);
-        ImageView im_back_danh_sach = (ImageView) findViewById(R.id.back_danh_sach);
-        ImageView iv_hoan_thanh_tao_danh_sach_task = (ImageView) findViewById(R.id.iv_hoan_thanh_tao_danh_sach_task);
-        FloatingActionButton fab_them_danh_sach = (FloatingActionButton) findViewById(R.id.fab_them_danh_sach);
+        EditText ed_them_danh_sach = (EditText) findViewById(R.id.ed_them_the);
+        ImageView im_back_danh_sach = (ImageView) findViewById(R.id.back_danh_sach_the);
+        ImageView iv_hoan_thanh_tao_danh_sach_task = (ImageView) findViewById(R.id.iv_navigation_view);
+        FloatingActionButton fab_them_danh_sach = (FloatingActionButton) findViewById(R.id.fab_them_the);
         fab_them_danh_sach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

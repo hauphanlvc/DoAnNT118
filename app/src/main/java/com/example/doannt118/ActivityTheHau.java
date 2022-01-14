@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,22 +27,32 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class ActivityTheHau extends AppCompatActivity {
+    ImageView iv_thoat_hoan_thanh_the,iv_hoan_thanh_the;
+    TextView tv_ten_viec;
+    EditText ed_tieu_de,ed_mo_ta_the;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_hau);
+        iv_hoan_thanh_the = (ImageView) findViewById(R.id.iv_hoan_thanh_the);
+        iv_thoat_hoan_thanh_the = (ImageView) findViewById(R.id.iv_thoat_hoan_thanh_the);
+        tv_ten_viec = (TextView) findViewById(R.id.tv_ten_viec);
+        ed_tieu_de = (EditText) findViewById(R.id.ed_tieu_de);
+        ed_mo_ta_the = (EditText) findViewById(R.id.ed_mo_ta_the);
+        iv_hoan_thanh_the.setVisibility(View.GONE);
         // Danh sách nhãn
         Spinner spinner = (Spinner) findViewById(R.id.sp_nhan);
 // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
         NgayHetHan();
         DanhSachCongViec();
+
     }
     public void NgayHetHan()
     {
