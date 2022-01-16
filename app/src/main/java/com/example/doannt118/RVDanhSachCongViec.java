@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doannt118.Class.CongViec;
 import com.example.doannt118.Class.TenDuAn;
+import com.example.doannt118.Class.TenThanhVienThe;
 
 import java.util.ArrayList;
 
@@ -24,15 +25,15 @@ public class RVDanhSachCongViec extends RecyclerView.Adapter<RVDanhSachCongViec.
     private ArrayList<CongViec> congViecs;
     private Context context;
     boolean isOnTextChanged = false;
-//    private static RVDanhSachCongViec.onClickListner onclicklistner;
-    public RVDanhSachCongViec(ArrayList<CongViec> congViecs,Context context)
+    //    private static RVDanhSachCongViec.onClickListner onclicklistner;
+    public RVDanhSachCongViec(ArrayList<CongViec> congViecs, Context context)
     {
         this.congViecs = congViecs;
         this.context = context;
     }
 
     @Override
-    public RVDanhSachCongViec.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -40,7 +41,7 @@ public class RVDanhSachCongViec extends RecyclerView.Adapter<RVDanhSachCongViec.
         View contactView = inflater.inflate(R.layout.item_cong_viec, parent, false);
 
         // Return a new holder instance
-        RVDanhSachCongViec.ViewHolder viewHolder = new RVDanhSachCongViec.ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(contactView);
         return viewHolder;
 
     }
@@ -58,7 +59,29 @@ public class RVDanhSachCongViec extends RecyclerView.Adapter<RVDanhSachCongViec.
             ed_ten_cong_viec = (EditText) v.findViewById(R.id.ed_ten_cong_viec);
 //            v.setOnClickListener(this);
 //            v.setOnLongClickListener(this);
+            ed_ten_cong_viec.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    int position = getAdapterPosition();
+                    CongViec congViec = congViecs.get(position);
+                    congViec.setTen_cong_viec(s.toString());
+                    congViecs.set(position,congViec);
+//                    ImageView iv_hoan_thanh_the = (ImageView)  v.findViewById(R.id.iv_hoan_thanh_the);
+//                    iv_hoan_thanh_the.setVisibility(View.VISIBLE);
+//                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
         }
 
     }
@@ -71,7 +94,7 @@ public class RVDanhSachCongViec extends RecyclerView.Adapter<RVDanhSachCongViec.
         return position == 0 ? 0 : 1;
     }
     @Override
-    public void onBindViewHolder(RVDanhSachCongViec.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         CongViec congViec = congViecs.get(position);
         if (congViec.getTen_cong_viec()!=null)
         {
@@ -82,29 +105,19 @@ public class RVDanhSachCongViec extends RecyclerView.Adapter<RVDanhSachCongViec.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 congViec.setDone(isChecked);
+                congViecs.set(position,congViec);
+                notifyDataSetChanged();
+//                View view = holder.itemView;
+//                ImageView iv_hoan_thanh_the = (ImageView)  view.findViewById(R.id.iv_hoan_thanh_the);
+//                iv_hoan_thanh_the.setVisibility(View.VISIBLE);
+
             }
         });
-
+//
         holder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                congViecs.remove(position);
-
-            }
-        });
-        holder.ed_ten_cong_viec.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+                removeAt(position);
 
             }
         });
@@ -115,6 +128,15 @@ public class RVDanhSachCongViec extends RecyclerView.Adapter<RVDanhSachCongViec.
     public int getItemCount() {
         return congViecs.size();
     }
-
+    public ArrayList<CongViec> getCongViecs()
+    {
+        return congViecs;
+    }
+    private void removeAt(int position) {
+        congViecs.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, congViecs.size());
+    }
 }
+
 

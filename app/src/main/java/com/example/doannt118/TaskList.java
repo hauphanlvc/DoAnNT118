@@ -70,7 +70,7 @@ public class TaskList extends AppCompatActivity {
             private static final String TAG = "adapter";
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(TaskList.this, "chọn thẻ ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TaskList.this,tenCacTasks.get(position).getTen_cac_task() , Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(),  ActivityTheHau.class);
                 intent.putExtra("email", email);
                 intent.putExtra("project_name",project_name);

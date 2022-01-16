@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.doannt118.Class.CongViec;
 import com.example.doannt118.Class.TenCacTask;
@@ -46,7 +47,9 @@ public class ActivityTheHau extends AppCompatActivity {
     TextView tv_ten_viec,tv_thanh_vien;
     EditText ed_tieu_de,ed_mo_ta_the;
     ArrayList<TenCacTask> tenCacTasks;
+    ArrayList<CongViec> congViecs;
     Dialog dialog;
+    RVDanhSachCongViec adapter_danh_sach_cong_viec;
     ArrayList<TenThanhVienThe> thanhVienThes;
     String email,project_name,task_list_name,task_name;
     @Override
@@ -75,16 +78,20 @@ public class ActivityTheHau extends AppCompatActivity {
         // Danh sách nhãn
         Spinner spinner = (Spinner) findViewById(R.id.sp_nhan);
 // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter_nhan = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter_nhan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter_nhan);
         tenCacTasks = new ArrayList<TenCacTask>();
         thanhVienThes = new ArrayList<TenThanhVienThe>();
+        congViecs = new ArrayList<CongViec>();
         ClickThanhVien();
         NgayHetHan();
+//        DanhSachCongViec();
+        ThemCongViec();
         DanhSachCongViec();
+        UpdateDanhSachCongViec();
 
     }
     public void ClickThanhVien()
@@ -181,8 +188,96 @@ public class ActivityTheHau extends AppCompatActivity {
             }
         });
     }
+
+    public void ThemCongViec()
+    {
+        ImageView iv_them_cong_viec = (ImageView) findViewById(R.id.iv_them_cong_viec);
+        EditText ed_them_cong_viec = (EditText) findViewById(R.id.ed_them_cong_viec);
+//        congViecs.add(new CongViec("fdasjf",true));
+//        congViecs.add(new CongViec("fdiureoqwiruoqweasjf",false));
+
+        iv_them_cong_viec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String them_cong_viec = ed_them_cong_viec.getText().toString();
+                if (them_cong_viec.equals(""))
+                {
+                    Toast.makeText(ActivityTheHau.this, "Vui lòng đừng bỏ trống ô nhập thêm công việc  nhen", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+                    CongViec congViec = new CongViec(them_cong_viec,false);
+                    reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("work_checklist").child(them_cong_viec).setValue(congViec);
+
+//                    congViecs.add(congViec);
+//                    adapter_danh_sach_cong_viec.notifyDataSetChanged();
+                    ed_them_cong_viec.setText("");
+                }
+            }
+        });
+
+    }
     public void DanhSachCongViec()
     {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
 
+        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("work_checklist").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    congViecs.clear();
+
+                    for (DataSnapshot i: dataSnapshot.getChildren())
+                    {
+//                        congViecs.add(i.getValue(CongViec.class));
+                        congViecs.add(new CongViec(i.child("ten_cong_viec").getValue(String.class) , i.child("done").getValue(boolean.class)));
+//
+                    }
+//                Log.d("Tag", "HienThiDanhSachCongViec: " + congViecs.toString());
+                HienThiDanhSachCongViec();
+//                Log.d("Tag", "HienThiDanhSachCongViec: " + congViecs.toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void HienThiDanhSachCongViec()
+    {
+        Log.d("Tag 1", "HienThiDanhSachCongViec: " + congViecs.toString());
+        RecyclerView ListCongViec = (RecyclerView) findViewById(R.id.rv_danh_sach_cong_viec);
+        ListCongViec.setHasFixedSize(false);
+
+        adapter_danh_sach_cong_viec = new RVDanhSachCongViec(congViecs,ActivityTheHau.this);
+        LinearLayoutManager linearLayoutManager_danh_sach_cong_viec = new LinearLayoutManager(ActivityTheHau.this);
+//
+        ListCongViec.setAdapter(adapter_danh_sach_cong_viec);
+        ListCongViec.setLayoutManager(linearLayoutManager_danh_sach_cong_viec);
+
+
+
+    }
+    public void UpdateDanhSachCongViec()
+    {
+        ImageView iv_hoan_thanh_the = (ImageView) findViewById(R.id.iv_hoan_thanh_the);
+        iv_hoan_thanh_the.setVisibility(View.VISIBLE);
+        iv_hoan_thanh_the.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = 0;
+                for (CongViec i:adapter_danh_sach_cong_viec.getCongViecs())
+                {
+
+                    Log.d("TAG", "HienThiDanhSachCongViec: " + i.getTen_cong_viec() + ", " + i.getDone());
+                    Toast.makeText(ActivityTheHau.this, "HienThiDanhSachCongViec: " + i.getTen_cong_viec() + ", " + i.getDone(), Toast.LENGTH_LONG).show();
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+                    reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("work_checklist").child(congViecs.get(id).getTen_cong_viec()).setValue(i);
+                }
+                }
+
+        });
     }
 }

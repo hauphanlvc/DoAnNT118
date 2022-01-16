@@ -68,7 +68,7 @@ public class MainActivityProject extends AppCompatActivity {
             private static final String TAG = "adapter";
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(MainActivityProject.this, "chọn danh sách ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityProject.this, tenDanhSachTasks.get(position).getTen_danh_sach_task(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(),  TaskList.class);
                 intent.putExtra("email", email);
                 intent.putExtra("project_name",project_name);

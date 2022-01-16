@@ -191,17 +191,17 @@
         app:srcCompat="@android:drawable/arrow_down_float" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="302dp"
+        android:id="@+id/rv_danh_sach_cong_viec"
+        android:layout_width="match_parent"
 
-        android:layout_height="203dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_danh_sach_cong_viec" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/ed_them_cong_viec"
         android:layout_width="189dp"
         android:layout_height="48dp"
         android:layout_marginStart="52dp"
@@ -210,16 +210,16 @@
         android:hint="Thêm công việc "
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_danh_sach_cong_viec" />
 
     <ImageView
         android:id="@+id/iv_them_cong_viec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/ed_them_cong_viec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ed_them_cong_viec"
+        app:layout_constraintTop_toTopOf="@+id/ed_them_cong_viec"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_menu_add" />
 

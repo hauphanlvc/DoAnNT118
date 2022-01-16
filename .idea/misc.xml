@@ -61,7 +61,7 @@
         <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_task_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_the_hau.xml" value="0.20253164556962025" />
+        <entry key="app/src/main/res/layout/activity_the_hau.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_them_danh_sach.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_them_du_an.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/activity_them_the.xml" value="0.1875" />
@@ -72,6 +72,7 @@
         <entry key="app/src/main/res/layout/custom_diaglog_thanh_vien.xml" value="0.5" />
         <entry key="app/src/main/res/layout/header_navigation_view.xml" value="0.23505434782608695" />
         <entry key="app/src/main/res/layout/item_cong_.xml" value="0.2586050724637681" />
+        <entry key="app/src/main/res/layout/item_cong_viec.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/item_du_an.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/item_thanh_vien_the.xml" value="0.2785425101214575" />
         <entry key="app/src/main/res/layout/layout_item_the.xml" value="0.19947916666666668" />
