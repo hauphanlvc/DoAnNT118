@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.doannt118.Class.TenCacTask;
 import com.example.doannt118.Class.TenDanhSachTask;
+import com.example.doannt118.Class.TenThanhVienThe;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -69,12 +70,13 @@ public class TaskList extends AppCompatActivity {
             private static final String TAG = "adapter";
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(TaskList.this, "chọn dự án ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TaskList.this, "chọn thẻ ", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(v.getContext(),  ActivityTheHau.class);
                 intent.putExtra("email", email);
                 intent.putExtra("project_name",project_name);
                 intent.putExtra("task_list_name",task_list_name);
                 intent.putExtra("task_name",tenCacTasks.get(position).getTen_cac_task());
+
                 v.getContext().startActivity(intent);
 
             }
@@ -84,7 +86,7 @@ public class TaskList extends AppCompatActivity {
     public void HienThiTenCacDanhSachTask()
     {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").addValueEventListener(new ValueEventListener() {
+        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
@@ -126,8 +128,28 @@ public class TaskList extends AppCompatActivity {
                 {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
                     reference.child(project_name + "/task_lists/"+task_list_name + "/tasks").child(ed_them_task.getText().toString()).child("task_name").setValue(ed_them_task.getText().toString());
+                    reference.child(project_name).child("member_of_project").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ArrayList<String> list_project = new ArrayList<String>();
+                            for (DataSnapshot i: dataSnapshot.getChildren())
+                            {
+//                                list_project.add(i.child("email_member").getValue(String.class));
+                                String user_name = i.child("email_member").getValue(String.class);
+                                TenThanhVienThe tenThanhVienThe = new TenThanhVienThe(user_name,false);
+                                reference.child(project_name + "/task_lists/"+task_list_name + "/tasks").child(ed_them_task.getText().toString()).child("member_of_task").child(user_name).setValue(tenThanhVienThe);
+
+                            }
+                            ed_them_task.setText("");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                     Log.d("Tag", "onClick: " + reference.getRef().toString());
-                    ed_them_task.setText("");
+
 
 
                 }

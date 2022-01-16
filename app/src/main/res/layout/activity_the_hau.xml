@@ -124,6 +124,8 @@
         app:layout_constraintStart_toEndOf="@+id/iv_thanh_vien"
         app:layout_constraintTop_toBottomOf="@+id/sp_nhan" />
 
+
+
     <ImageView
         android:id="@+id/iv_ngay_het_han"
         android:layout_width="wrap_content"
@@ -194,13 +196,14 @@
 
         android:layout_height="203dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_danh_sach_cong_viec"
-        tools:layout_editor_absoluteX="56dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_danh_sach_cong_viec" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="189dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="12dp"
         android:ems="10"
@@ -219,6 +222,16 @@
         app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="31dp"
+        android:layout_height="33dp"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_show_deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_show_deadline"
+        app:layout_constraintTop_toTopOf="@+id/tv_show_deadline" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

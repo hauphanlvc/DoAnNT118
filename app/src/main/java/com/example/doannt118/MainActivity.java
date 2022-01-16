@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     public void HienThiTenDuAn()
     {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 tenDuAns.clear();
