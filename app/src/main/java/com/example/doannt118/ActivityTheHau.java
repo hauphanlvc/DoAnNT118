@@ -71,6 +71,7 @@ public class ActivityTheHau extends AppCompatActivity {
         iv_thoat_hoan_thanh_the.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 onBackPressed();
                 finish();
             }
@@ -91,7 +92,7 @@ public class ActivityTheHau extends AppCompatActivity {
 //        DanhSachCongViec();
         ThemCongViec();
         DanhSachCongViec();
-        UpdateDanhSachCongViec();
+//        UpdateDanhSachCongViec();
 
     }
     public void ClickThanhVien()
@@ -211,8 +212,8 @@ public class ActivityTheHau extends AppCompatActivity {
                     CongViec congViec = new CongViec(them_cong_viec,false);
                     reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("work_checklist").child(them_cong_viec).setValue(congViec);
 
-//                    congViecs.add(congViec);
-//                    adapter_danh_sach_cong_viec.notifyDataSetChanged();
+                    congViecs.add(congViec);
+                    adapter_danh_sach_cong_viec.notifyDataSetChanged();
                     ed_them_cong_viec.setText("");
                 }
             }
@@ -251,33 +252,12 @@ public class ActivityTheHau extends AppCompatActivity {
         RecyclerView ListCongViec = (RecyclerView) findViewById(R.id.rv_danh_sach_cong_viec);
         ListCongViec.setHasFixedSize(false);
 
-        adapter_danh_sach_cong_viec = new RVDanhSachCongViec(congViecs,ActivityTheHau.this);
+        adapter_danh_sach_cong_viec = new RVDanhSachCongViec(congViecs,ActivityTheHau.this,email,project_name,task_list_name,task_name);
         LinearLayoutManager linearLayoutManager_danh_sach_cong_viec = new LinearLayoutManager(ActivityTheHau.this);
 //
         ListCongViec.setAdapter(adapter_danh_sach_cong_viec);
         ListCongViec.setLayoutManager(linearLayoutManager_danh_sach_cong_viec);
 
-
-
     }
-    public void UpdateDanhSachCongViec()
-    {
-        ImageView iv_hoan_thanh_the = (ImageView) findViewById(R.id.iv_hoan_thanh_the);
-        iv_hoan_thanh_the.setVisibility(View.VISIBLE);
-        iv_hoan_thanh_the.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int id = 0;
-                for (CongViec i:adapter_danh_sach_cong_viec.getCongViecs())
-                {
 
-                    Log.d("TAG", "HienThiDanhSachCongViec: " + i.getTen_cong_viec() + ", " + i.getDone());
-                    Toast.makeText(ActivityTheHau.this, "HienThiDanhSachCongViec: " + i.getTen_cong_viec() + ", " + i.getDone(), Toast.LENGTH_LONG).show();
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-                    reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("work_checklist").child(congViecs.get(id).getTen_cong_viec()).setValue(i);
-                }
-                }
-
-        });
-    }
 }
