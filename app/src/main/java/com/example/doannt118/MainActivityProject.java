@@ -125,9 +125,10 @@ public class MainActivityProject extends AppCompatActivity {
                 {
                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
                     reference.child(project_name).child("task_lists").child(ed_them_danh_sach.getText().toString()).child("task_list_name").setValue(ed_them_danh_sach.getText().toString());
-                    ed_them_danh_sach.setText("");
-//                    tenDanhSachTasks.add(new TenDanhSachTask(ed_them_danh_sach.getText().toString()));
 
+                    tenDanhSachTasks.add(new TenDanhSachTask(ed_them_danh_sach.getText().toString()));
+                    adapter.notifyDataSetChanged();
+                    ed_them_danh_sach.setText("");
                 }
             }
         });

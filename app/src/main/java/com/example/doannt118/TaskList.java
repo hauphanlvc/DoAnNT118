@@ -138,7 +138,8 @@ public class TaskList extends AppCompatActivity {
                                 String user_name = i.child("email_member").getValue(String.class);
                                 TenThanhVienThe tenThanhVienThe = new TenThanhVienThe(user_name,false);
                                 reference.child(project_name + "/task_lists/"+task_list_name + "/tasks").child(ed_them_task.getText().toString()).child("member_of_task").child(user_name).setValue(tenThanhVienThe);
-
+                                tenCacTasks.add(new TenCacTask(ed_them_task.getText().toString()));
+                                adapter.notifyDataSetChanged();
                             }
                             ed_them_task.setText("");
                         }

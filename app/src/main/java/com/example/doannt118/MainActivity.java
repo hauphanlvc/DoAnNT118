@@ -248,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(v.getContext(), Activity_them_du_an.class);
                         intent.putExtra("email", email);
                         v.getContext().startActivity(intent);
+
                     }
                 });
 
@@ -255,6 +256,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        HienThiTenDuAn();
+//        adapter.notifyItemInserted(lessonId.getSize()-1);
 
     }
 }

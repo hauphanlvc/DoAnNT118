@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.doannt118.Class.CongViec;
@@ -39,8 +41,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ActivityTheHau extends AppCompatActivity {
     ImageView iv_thoat_hoan_thanh_the,iv_hoan_thanh_the;
@@ -48,10 +53,11 @@ public class ActivityTheHau extends AppCompatActivity {
     EditText ed_tieu_de,ed_mo_ta_the;
     ArrayList<TenCacTask> tenCacTasks;
     ArrayList<CongViec> congViecs;
-    Dialog dialog;
+    Dialog dialog,dialog_ngay_het_han;
     RVDanhSachCongViec adapter_danh_sach_cong_viec;
     ArrayList<TenThanhVienThe> thanhVienThes;
     String email,project_name,task_list_name,task_name;
+    String due_date,due_time,reminder_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +82,20 @@ public class ActivityTheHau extends AppCompatActivity {
                 finish();
             }
         });
+
+        tenCacTasks = new ArrayList<TenCacTask>();
+        thanhVienThes = new ArrayList<TenThanhVienThe>();
+        congViecs = new ArrayList<CongViec>();
+        ClickThanhVien();
+        NgayHetHan();
+        Nhan();
+        ThemCongViec();
+        DanhSachCongViec();
+
+
+    }
+    public void Nhan()
+    {
         // Danh sách nhãn
         Spinner spinner = (Spinner) findViewById(R.id.sp_nhan);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -84,16 +104,6 @@ public class ActivityTheHau extends AppCompatActivity {
         adapter_nhan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter_nhan);
-        tenCacTasks = new ArrayList<TenCacTask>();
-        thanhVienThes = new ArrayList<TenThanhVienThe>();
-        congViecs = new ArrayList<CongViec>();
-        ClickThanhVien();
-        NgayHetHan();
-//        DanhSachCongViec();
-        ThemCongViec();
-        DanhSachCongViec();
-//        UpdateDanhSachCongViec();
-
     }
     public void ClickThanhVien()
     {
@@ -169,27 +179,183 @@ public class ActivityTheHau extends AppCompatActivity {
     {
         DatePickerDialog.OnDateSetListener setListener;
         Calendar calendar = Calendar.getInstance();
-        final int year = calendar.get(Calendar.YEAR);
-        final int month = calendar.get(Calendar.MONTH);
-        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
         TextView tv_ngay_het_han = (TextView) findViewById(R.id.tv_ngay_het_han);
         TextView tv_show_deadline = (TextView) findViewById(R.id.tv_show_deadline);
+
         tv_ngay_het_han.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityTheHau.this, new DatePickerDialog.OnDateSetListener() {
+                getNgayHetHan();
+//                ShowNgayHeHanDialog();
+            }
+        });
+    }
+    public void getNgayHetHan()
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                due_date = dataSnapshot.child("due_date").getValue(String.class);
+                due_time = dataSnapshot.child("due_time").getValue(String.class);
+                reminder_time = dataSnapshot.child("reminder_time").getValue(String.class);
+                ShowNgayHeHanDialog();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void ShowNgayHeHanDialog()
+    {
+        dialog_ngay_het_han =  new Dialog(this,R.style.Theme_Dialog);
+        dialog_ngay_het_han.setCancelable(false);
+        dialog_ngay_het_han.setContentView(R.layout.custom_dialog_chon_ngay_het_han);
+        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+        if (!isFinishing())
+        {
+            dialog_ngay_het_han.show();
+        }
+        TextView tv_chon_ngay_het_han_diaglog = (TextView) dialog_ngay_het_han.findViewById(R.id.tv_chon_ngay_het_han_diaglog);
+        TextView tv_chon_thoi_gian_het_han_diaglog = (TextView) dialog_ngay_het_han.findViewById(R.id.tv_chon_thoi_gian_het_han_diaglog);
+
+        // Danh sách nhãn
+        Spinner sp_thiet_lap_nhac_nho = (Spinner) dialog_ngay_het_han.findViewById(R.id.sp_thiet_lap_nhac_nho);
+// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter<CharSequence> adapter_thiet_lap_nhac_nho = ArrayAdapter.createFromResource(this, R.array.list_thoi_gian_nhac_nho, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        ArrayList<String> list_thoi_gian_nhac_nho = new ArrayList<String>();
+        list_thoi_gian_nhac_nho.add("Vào thời điểm ngày hết hạn");
+        list_thoi_gian_nhac_nho.add("15 phút trước");
+        list_thoi_gian_nhac_nho.add("1 giờ trước");
+        list_thoi_gian_nhac_nho.add("2 giờ trước");
+        list_thoi_gian_nhac_nho.add("1 ngày trước");
+        ArrayAdapter adapter_thiet_lap_nhac_nho= new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_thoi_gian_nhac_nho);
+        adapter_thiet_lap_nhac_nho.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        sp_thiet_lap_nhac_nho.setAdapter(adapter_thiet_lap_nhac_nho);
+        Calendar calendar = Calendar.getInstance();
+       int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+       int day = calendar.get(Calendar.DAY_OF_MONTH);
+//        int year,month,day;
+//        int day ;
+       int hour = 9;
+       int minute = 30;
+        if (due_date!=null) {
+            tv_chon_ngay_het_han_diaglog.setText(due_date);
+            tv_chon_thoi_gian_het_han_diaglog.setText(due_time);
+            sp_thiet_lap_nhac_nho.setSelection(list_thoi_gian_nhac_nho.indexOf(reminder_time));
+            SimpleDateFormat due_date_formater = new SimpleDateFormat("dd/MM/yyyy");
+            Calendar cal = Calendar.getInstance();
+            try {
+                Date d = due_date_formater.parse(due_date);
+                cal.setTime(d);
+                day = cal.get(Calendar.DAY_OF_MONTH);
+                month = cal.get(Calendar.MONTH);
+                year = cal.get(Calendar.YEAR);
+            } catch (ParseException ex) {
+                Log.v("Exception", ex.getLocalizedMessage());
+            }
+        }
+        if (due_time!=null)
+        {
+            SimpleDateFormat due_time_formater = new SimpleDateFormat("hh:mm");
+            Calendar cal = Calendar.getInstance();
+            try {
+                Date d = due_time_formater.parse(due_date);
+                cal.setTime(d);
+                hour = cal.get(Calendar.HOUR_OF_DAY);
+                minute = cal.get(Calendar.MINUTE);
+            } catch (ParseException ex) {
+                Log.v("Exception", ex.getLocalizedMessage());
+            }
+        }
+
+
+        Button bt_cancel_chon_ngay_het_han_dialog = (Button) dialog_ngay_het_han.findViewById(R.id.bt_cancel_chon_ngay_het_han_dialog);
+        Button bt_hoan_tat_chon_ngay_het_han_dialog = (Button) dialog_ngay_het_han.findViewById(R.id.bt_hoan_tat_chon_ngay_het_han_dialog);
+        bt_cancel_chon_ngay_het_han_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_ngay_het_han.cancel();
+
+            }
+        });
+
+        int finalDay = day;
+
+        int finalYear = year;
+        int finalMonth = month;
+        tv_chon_ngay_het_han_diaglog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ActivityTheHau.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar,new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month=month+1;
                         String date = day+"/"+month+"/"+year;
-                        tv_show_deadline.setText(date);
+                        tv_chon_ngay_het_han_diaglog.setText(date);
+                        due_date = date;
                     }
-                },year,month,day);
+                }, finalYear, finalMonth, finalDay);
                 datePickerDialog.show();
             }
         });
-    }
+        int finalHour = hour;
+        int finalMinute = minute;
+        tv_chon_thoi_gian_het_han_diaglog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Calendar mcurrentTime = Calendar.getInstance();
+////                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+////                int minute = mcurrentTime.get(Calendar.MINUTE);
 
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(ActivityTheHau.this,android.R.style.Theme_Holo_Light_Dialog_NoActionBar, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        tv_chon_thoi_gian_het_han_diaglog.setText( selectedHour + ":" + selectedMinute);
+                        due_time = selectedHour + ":" + selectedMinute;
+                    }
+                }, finalHour, finalMinute, true);//Yes 24 hour time
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
+            }
+        });
+//        due_date = tv_chon_ngay_het_han_diaglog.getText().toString();
+//        due_time = tv_chon_thoi_gian_het_han_diaglog.getText().toString();
+        sp_thiet_lap_nhac_nho.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                reminder_time = list_thoi_gian_nhac_nho.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        bt_hoan_tat_chon_ngay_het_han_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if (!due_date.equals("Chọn một ngày ") && !due_time.equals("Chọn thời gian")) {
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+                    reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("due_date").setValue(due_date);
+                    reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("due_time").setValue(due_time);
+                    reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("reminder_time").setValue(reminder_time);
+
+
+//                }
+                dialog_ngay_het_han.cancel();
+            }
+        });
+
+    }
     public void ThemCongViec()
     {
         ImageView iv_them_cong_viec = (ImageView) findViewById(R.id.iv_them_cong_viec);
