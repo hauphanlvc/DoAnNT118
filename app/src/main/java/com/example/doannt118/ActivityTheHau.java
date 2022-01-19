@@ -13,6 +13,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +22,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -57,7 +61,8 @@ public class ActivityTheHau extends AppCompatActivity {
     RVDanhSachCongViec adapter_danh_sach_cong_viec;
     ArrayList<TenThanhVienThe> thanhVienThes;
     String email,project_name,task_list_name,task_name;
-    String due_date,due_time,reminder_time;
+    String due_date,due_time,reminder_time,description,title,tag;
+    boolean done_task;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,25 +91,173 @@ public class ActivityTheHau extends AppCompatActivity {
         tenCacTasks = new ArrayList<TenCacTask>();
         thanhVienThes = new ArrayList<TenThanhVienThe>();
         congViecs = new ArrayList<CongViec>();
+        SetTieuDeVaMoTaThe();
+
+        TieuDeVaMoTaThe();
         ClickThanhVien();
         NgayHetHan();
-        Nhan();
+        getNhan();
         ThemCongViec();
         DanhSachCongViec();
+        DoneTask();
 
+    }
+    public void DoneTask()
+    {
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                done_task = dataSnapshot.child("done_task").getValue(Boolean.class)  != null ? dataSnapshot.child("done_task").getValue(Boolean.class) : false;
+
+                setDone_task();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void setDone_task()
+    {
+        CheckBox cb_done_task = (CheckBox) findViewById(R.id.cb_done_task);
+        cb_done_task.setChecked(done_task);
+        cb_done_task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                done_task = isChecked;
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+
+                reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("done_task").setValue(done_task);
+
+            }
+        });
+    }
+    public void SetTieuDeVaMoTaThe()
+    {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               title = dataSnapshot.child("title").getValue(String.class);
+               description = dataSnapshot.child("description").getValue(String.class);
+               ed_tieu_de.setText(title);
+               ed_mo_ta_the.setText(description);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void TieuDeVaMoTaThe()
+    {
+        ed_tieu_de.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                    String new_title = s.toString();
+
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+
+                        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("title").setValue(new_title);
+
+            }
+        });
+        ed_mo_ta_the.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String new_description = s.toString();
+
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+
+                reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("description").setValue(new_description);
+
+            }
+        });
+    }
+    public void getNhan()
+    {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+        reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                tag = dataSnapshot.child("tag").getValue(String.class);
+                Nhan();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     public void Nhan()
     {
         // Danh sách nhãn
         Spinner spinner = (Spinner) findViewById(R.id.sp_nhan);
 // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter_nhan = ArrayAdapter.createFromResource(this, R.array.planets_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        ArrayList<String> list_nhan = new ArrayList<String>();
+        list_nhan.add("Cấp 1");
+        list_nhan.add("Cấp 2");
+        list_nhan.add("Cấp 3");
+
+        ArrayAdapter adapter_nhan = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_nhan);
+        // Specify the layout to use when the list of choices appears
         adapter_nhan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter_nhan);
+//        if (tag!=null) {
+//            spinner.setSelection(list_nhan.indexOf(tag));
+//        }
+        Log.d("TAG", "Nhan: " + tag);
+        spinner.setSelection(list_nhan.indexOf(tag));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tag = list_nhan.get(position);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
+                reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(task_name).child("tag").setValue(tag);
+                adapter_nhan.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
     }
+
+
     public void ClickThanhVien()
     {
         tv_thanh_vien.setOnClickListener(new View.OnClickListener() {
