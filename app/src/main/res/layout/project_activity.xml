@@ -51,28 +51,7 @@
             app:layout_constraintTop_toTopOf="@+id/back_danh_sach_the"
             app:layout_constraintVertical_bias="0.333" />
 
-        <ImageView
-            android:id="@+id/notification_danh_sach"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
 
-            android:layout_marginStart="96dp"
-            android:contentDescription="noficication symbol"
-            android:src="@drawable/ic_notifications"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/boards_danh_sach_the"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/textView3_ds"
-            android:layout_width="21dp"
-            android:layout_height="19dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="0"
-            app:layout_constraintStart_toEndOf="@+id/notification_danh_sach"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_navigation_view"
