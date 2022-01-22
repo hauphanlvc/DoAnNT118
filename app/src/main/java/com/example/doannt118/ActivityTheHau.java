@@ -297,7 +297,7 @@ public class ActivityTheHau extends AppCompatActivity {
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
 
         RecyclerView ListThanhVienDialog = (RecyclerView) dialog.findViewById(R.id.rv_thanh_vien_the_dialog);
-        ListThanhVienDialog.setHasFixedSize(true);
+        ListThanhVienDialog.setHasFixedSize(false);
         RVAdapterDanhSachThanhVienTheDiaglog adapter = new RVAdapterDanhSachThanhVienTheDiaglog(thanhVienThes, this);
 //
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -325,7 +325,6 @@ public class ActivityTheHau extends AppCompatActivity {
 //                    finish();
                 }
             });
-
 
     }
     public void NgayHetHan()

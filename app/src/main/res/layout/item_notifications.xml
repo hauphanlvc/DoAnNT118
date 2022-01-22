@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_danh_sach_notifications"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background = "@drawable/shape" >
+
+
+
+        <TextView
+            android:id="@+id/tv_noi_dung_thong_bao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Người dùng a mời bạn tham gia dự án demo. Bạn có đồng ý không ?"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background = "@drawable/shape"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_noi_dung_thong_bao">
+
+            <Button
+                android:id="@+id/bt_khong_tham_gia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Không tham gia"
+                app:backgroundTint="@color/CadetBlue" />
+
+            <Space
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <Button
+                android:id="@+id/bt_tham_gia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:contentDescription="nút thêm"
+                android:focusable="true"
+                android:text="Tham gia"
+                app:backgroundTint="@color/CadetBlue" />
+        </LinearLayout>
+
+
+
+
+</LinearLayout>

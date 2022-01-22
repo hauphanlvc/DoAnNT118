@@ -14,27 +14,25 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doannt118.Class.TenCacTask;
+import com.example.doannt118.Class.TenDuAn;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder>{
-    private ArrayList<TenCacTask> TenCacTasks;
+public class RvNewDuAn extends RecyclerView.Adapter<RvNewDuAn.ViewHolder>{
+    private ArrayList<TenDuAn> tenDuAns;
     private Context context;
-    private static RVDanhSachThe.onClickListner onclicklistner;
-    private String email,project_name,task_list_name;
-    public RVDanhSachThe(ArrayList<TenCacTask> TenCacTasks,Context context,String email,String project_name,String task_list_name)
+    private static RvNewDuAn.onClickListner onclicklistner;
+    private String email,project_name,task_list_name;    public RvNewDuAn(ArrayList<TenDuAn> tenDuAns,Context context)
     {
-        this.TenCacTasks = TenCacTasks;
+        this.tenDuAns = tenDuAns;
         this.context = context;
-        this.email = email;
-        this.project_name = project_name;
-        this.task_list_name = task_list_name;
+
     }
 
     @Override
-    public RVDanhSachThe.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RvNewDuAn.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -42,7 +40,7 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
         View contactView = inflater.inflate(R.layout.item_du_an, parent, false);
 
         // Return a new holder instance
-        RVDanhSachThe.ViewHolder viewHolder = new RVDanhSachThe.ViewHolder(contactView);
+        RvNewDuAn.ViewHolder viewHolder = new RvNewDuAn.ViewHolder(contactView);
         return viewHolder;
 
     }
@@ -50,7 +48,7 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
         public TextView tv_project_name;
         public ImageView iv_project,iv_xoa_project;
         public LinearLayout linear;
-        RVDanhSachThe adapter;
+        RvNewDuAn adapter;
         public ViewHolder(View v) {
             super(v);
             tv_project_name = (TextView) v.findViewById(R.id.tv_project_name);
@@ -72,8 +70,8 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
 //            return true;
 //        }
     }
-    public void setOnItemClickListener(RVDanhSachThe.onClickListner onclicklistner) {
-        RVDanhSachThe.onclicklistner = onclicklistner;
+    public void setOnItemClickListener(RvNewDuAn.onClickListner onclicklistner) {
+        RvNewDuAn.onclicklistner = onclicklistner;
     }
 //
 //    public void setHeader(View v) {
@@ -92,25 +90,25 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
         return position == 0 ? 0 : 1;
     }
     @Override
-    public void onBindViewHolder(RVDanhSachThe.ViewHolder holder, int position) {
-        TenCacTask tenCacTask = TenCacTasks.get(position);
-        if (tenCacTask.getTen_cac_task()!=null)
+    public void onBindViewHolder(RvNewDuAn.ViewHolder holder, int position) {
+        TenDuAn tenDuAn = tenDuAns.get(position);
+        if (tenDuAn.getTen_Du_An()!=null)
         {
-            holder.tv_project_name.setText(tenCacTask.getTen_cac_task());
+            holder.tv_project_name.setText(tenDuAn.getTen_Du_An());
         }
         holder.iv_xoa_project.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Bạn có muốn xóa thẻ này này không ?")
+                builder.setMessage("Bạn có muốn xóa dự án này không ?")
                         .setCancelable(false)
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 removeAt(position);
                                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
 //                    CongViec congViec = new CongViec(them_cong_viec,false);
-                                reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(tenCacTask.getTen_cac_task()).removeValue();
+                                reference.child(tenDuAn.getTen_Du_An()).removeValue();
 
                             }
                         })
@@ -134,13 +132,13 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
 
     }
     private void removeAt(int position) {
-        TenCacTasks.remove(position);
+        tenDuAns.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, TenCacTasks.size());
+        notifyItemRangeChanged(position, tenDuAns.size());
     }
     @Override
     public int getItemCount() {
-        return TenCacTasks.size();
+        return tenDuAns.size();
     }
 
 }

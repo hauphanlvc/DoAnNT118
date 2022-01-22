@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.doannt118.Class.Notification;
 import com.example.doannt118.Class.TenDuAn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -41,16 +42,18 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ArrayList<TenDuAn> tenDuAns;
     FloatingActionButton fabAddTask,fabAdd,fabAddProject;
-    TextView tvAddCard,tvAddProject;
-    RecyleViewDanhSachDuAn adapter;
+    TextView tvAddCard,tvAddProject,tv_so_luong_thong_bao;
+    RvNewDuAn adapter;
 
     AlertDialog.Builder diaglogDangXuat;
     // kiểm tra nút add có đang nhấn hay không
     String userId;
     Boolean isAllFabsVisible;
     String email;
+    int so_luong_thong_bao;
 
     List<User> messages ;
+    ArrayList<Notification> notifications;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,27 +72,64 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.design_navigation_view);
         navigationView.setItemIconTintList(null);
+
         // Sau khi nhấn vào biểu tượng thông báo
+
+        // Lấy email từ login
+        notifications = new ArrayList<Notification>();
+        tv_so_luong_thong_bao = (TextView) findViewById(R.id.tv_so_luong_thong_bao);
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+        tenDuAns = new ArrayList<TenDuAn>();
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.textView);
+        navUsername.setText(email);
+        getAllNotifications();
         findViewById(R.id.notification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), NotificationsActivity.class);
+                intent.putExtra("email", email);
                 view.getContext().startActivity(intent);
             }
         });
-        // Lấy email từ login
-        Intent intent = getIntent();
-        email = intent.getStringExtra("email");
-        tenDuAns = new ArrayList<TenDuAn>();
         AddTaskButton();
         HienThiTenDuAn();
         DangXuat();
 
-//
-//        mFirebaseInstance = FirebaseDatabase.getInstance();
-//
-//        // get reference to 'users' node
-//        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+    }
+    public void getAllNotifications()
+    {
+        int copy_so_luong_thong_bao = so_luong_thong_bao;
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                notifications.clear();
+
+                if (dataSnapshot.exists())
+                {
+                    Log.d("TAG", "danh sach thong bao " + dataSnapshot.getRef().toString());
+                    for (DataSnapshot i: dataSnapshot.child("notifications").getChildren())
+                    {
+                        notifications.add(new Notification(i.child("email_moi").getValue(String.class),i.child("project").getValue(String.class),i.child("agree").getValue(Boolean.class),i.child("confirm").getValue(Boolean.class),i.child("link_email_moi_project").getValue(String.class)));
+                        if ( i.child("confirm").getValue(Boolean.class) == false)
+                        {
+                            so_luong_thong_bao = so_luong_thong_bao + 1;
+                        }
+                    }
+                    Log.d("TAG", "danh sach thong bao 2 " + so_luong_thong_bao);
+                    tv_so_luong_thong_bao.setText( String.valueOf(so_luong_thong_bao));
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     public void DangXuat()
     {
@@ -134,12 +174,12 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("TAG", "printResult: "+tenDuAns.toString());
         RecyclerView ListProject = (RecyclerView) findViewById(R.id.ListProject);
-        adapter = new RecyleViewDanhSachDuAn(tenDuAns,this);
-        ListProject.setHasFixedSize(true);
+        adapter = new RvNewDuAn(tenDuAns,this);
+        ListProject.setHasFixedSize(false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         ListProject.setAdapter(adapter);
         ListProject.setLayoutManager(linearLayoutManager);
-        adapter.setOnItemClickListener(new RecyleViewDanhSachDuAn.onClickListner() {
+        adapter.setOnItemClickListener(new RvNewDuAn.onClickListner() {
             private static final String TAG = "adapter";
             @Override
             public void onItemClick(int position, View v) {
@@ -255,14 +295,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
     @Override
     protected void onResume() {
         super.onResume();
+        getAllNotifications();
         HienThiTenDuAn();
+
+//        getAllNotifications();
 //        adapter.notifyItemInserted(lessonId.getSize()-1);
 
     }
+
 }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/CadetBlue"
+    android:id = "@+id/dl_danh_sach_the"
     tools:context=".TaskList">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,18 +28,20 @@
 
             <TextView
                 android:id="@+id/boards_danh_sach_task_list"
-                android:layout_width="143dp"
-                android:layout_height="27dp"
+                android:layout_width="263dp"
+                android:layout_height="25dp"
                 android:layout_marginStart="24dp"
                 android:text="Danh sách dự án"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/iv_chinh_sua_ten_danh_sach"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/iv_back_task_list"
                 app:layout_constraintTop_toTopOf="@+id/iv_back_task_list" />
 
             <ImageView
-                android:id="@+id/iv_navigation_view"
+                android:id="@+id/iv_chinh_sua_ten_danh_sach"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -50,9 +53,9 @@
                 android:id="@+id/iv_back_task_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_navigation_view"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_chinh_sua_ten_danh_sach"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/iv_navigation_view"
+                app:layout_constraintTop_toTopOf="@+id/iv_chinh_sua_ten_danh_sach"
                 app:srcCompat="?attr/actionModeCloseDrawable" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,4 +107,12 @@
             app:srcCompat="@android:drawable/ic_input_add" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_chinh_sua_ten_danh_sach"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+
+        app:menu="@menu/menu_danh_sach"
+        android:layout_gravity = 'end'/>
 </androidx.drawerlayout.widget.DrawerLayout>

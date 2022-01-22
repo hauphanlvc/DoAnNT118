@@ -14,49 +14,50 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doannt118.Class.TenCacTask;
+import com.example.doannt118.Class.TenDanhSachTask;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder>{
-    private ArrayList<TenCacTask> TenCacTasks;
+public class RVDanhSachTaskList extends RecyclerView.Adapter<RVDanhSachTaskList.ViewHolder>{
+    private ArrayList<TenDanhSachTask> tenDanhSachTasks;
     private Context context;
-    private static RVDanhSachThe.onClickListner onclicklistner;
-    private String email,project_name,task_list_name;
-    public RVDanhSachThe(ArrayList<TenCacTask> TenCacTasks,Context context,String email,String project_name,String task_list_name)
+    private static RVDanhSachTaskList.onClickListner onclicklistner;
+    private String email,project_name;
+    public RVDanhSachTaskList(ArrayList<TenDanhSachTask> tenDanhSachTasks,Context context,String email,String project_name)
     {
-        this.TenCacTasks = TenCacTasks;
+        this.tenDanhSachTasks = tenDanhSachTasks;
         this.context = context;
         this.email = email;
         this.project_name = project_name;
-        this.task_list_name = task_list_name;
+
     }
 
     @Override
-    public RVDanhSachThe.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RVDanhSachTaskList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_du_an, parent, false);
+        View contactView = inflater.inflate(R.layout.item_danh_sach_task_list, parent, false);
 
         // Return a new holder instance
-        RVDanhSachThe.ViewHolder viewHolder = new RVDanhSachThe.ViewHolder(contactView);
+        RVDanhSachTaskList.ViewHolder viewHolder = new RVDanhSachTaskList.ViewHolder(contactView);
         return viewHolder;
 
     }
     class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
-        public TextView tv_project_name;
-        public ImageView iv_project,iv_xoa_project;
+        public TextView tv_ten_danh_sach_task_list;
+        public ImageView iv_project,iv_xoa_task_list;
         public LinearLayout linear;
-        RVDanhSachThe adapter;
+        RVDanhSachTaskList adapter;
         public ViewHolder(View v) {
             super(v);
-            tv_project_name = (TextView) v.findViewById(R.id.tv_project_name);
+            tv_ten_danh_sach_task_list = (TextView) v.findViewById(R.id.tv_ten_danh_sach_task_list);
             iv_project = (ImageView) v.findViewById(R.id.iv_project);
-            iv_xoa_project = (ImageView) v.findViewById(R.id.iv_xoa_project);
-            linear = (LinearLayout) v.findViewById(R.id.ll_danh_sach_du_an);
+            iv_xoa_task_list = (ImageView) v.findViewById(R.id.iv_xoa_task_list);
+            linear = (LinearLayout) v.findViewById(R.id.ll_danh_sach_task_list);
             v.setOnClickListener(this);
 //            v.setOnLongClickListener(this);
 
@@ -72,13 +73,10 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
 //            return true;
 //        }
     }
-    public void setOnItemClickListener(RVDanhSachThe.onClickListner onclicklistner) {
-        RVDanhSachThe.onclicklistner = onclicklistner;
+    public void setOnItemClickListener(RVDanhSachTaskList.onClickListner onclicklistner) {
+        RVDanhSachTaskList.onclicklistner = onclicklistner;
     }
-//
-//    public void setHeader(View v) {
-//        this.headerView = v;
-//    }
+
 
     public interface onClickListner {
         void onItemClick(int position, View v);
@@ -92,25 +90,25 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
         return position == 0 ? 0 : 1;
     }
     @Override
-    public void onBindViewHolder(RVDanhSachThe.ViewHolder holder, int position) {
-        TenCacTask tenCacTask = TenCacTasks.get(position);
-        if (tenCacTask.getTen_cac_task()!=null)
+    public void onBindViewHolder(RVDanhSachTaskList.ViewHolder holder, int position) {
+        TenDanhSachTask tenCacTask = tenDanhSachTasks.get(position);
+        if (tenCacTask.getTen_danh_sach_task()!=null)
         {
-            holder.tv_project_name.setText(tenCacTask.getTen_cac_task());
+            holder.tv_ten_danh_sach_task_list.setText(tenCacTask.getTen_danh_sach_task());
         }
-        holder.iv_xoa_project.setOnClickListener(new View.OnClickListener() {
+        holder.iv_xoa_task_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(v.getContext());
-                builder.setMessage("Bạn có muốn xóa thẻ này này không ?")
+                builder.setMessage("Bạn có muốn xóa danh sách này này không ?")
                         .setCancelable(false)
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 removeAt(position);
                                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
 //                    CongViec congViec = new CongViec(them_cong_viec,false);
-                                reference.child(project_name).child("task_lists").child(task_list_name).child("tasks").child(tenCacTask.getTen_cac_task()).removeValue();
+                                reference.child(project_name).child("task_lists").child(tenCacTask.getTen_danh_sach_task()).removeValue();
 
                             }
                         })
@@ -134,13 +132,13 @@ public class RVDanhSachThe extends RecyclerView.Adapter<RVDanhSachThe.ViewHolder
 
     }
     private void removeAt(int position) {
-        TenCacTasks.remove(position);
+        tenDanhSachTasks.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, TenCacTasks.size());
+        notifyItemRangeChanged(position, tenDanhSachTasks.size());
     }
     @Override
     public int getItemCount() {
-        return TenCacTasks.size();
+        return tenDanhSachTasks.size();
     }
 
 }

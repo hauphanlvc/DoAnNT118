@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/CadetBlue">
+    android:background="@color/CadetBlue"
+    android:id="@+id/dl_project_activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,16 +37,19 @@
 
         <TextView
             android:id="@+id/boards_danh_sach_the"
-            android:layout_width="143dp"
-            android:layout_height="27dp"
+            android:layout_width="230dp"
+            android:layout_height="28dp"
             android:layout_marginStart="10dp"
             android:text="Danh sách dự án"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/back_danh_sach_the"
+            app:layout_constraintEnd_toStartOf="@+id/iv_navigation_view"
+            app:layout_constraintHorizontal_bias="0.054"
             app:layout_constraintStart_toEndOf="@+id/back_danh_sach_the"
-            app:layout_constraintTop_toTopOf="@+id/back_danh_sach_the" />
+            app:layout_constraintTop_toTopOf="@+id/back_danh_sach_the"
+            app:layout_constraintVertical_bias="0.333" />
 
         <ImageView
             android:id="@+id/notification_danh_sach"
@@ -127,4 +131,12 @@
             app:layout_constraintTop_toTopOf="@+id/ed_them_the"
             app:srcCompat="@android:drawable/ic_input_add" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_chinh_sua_ten_du_an"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+
+        app:menu="@menu/menu_danh_sach_task_list"
+        android:layout_gravity = 'end'/>
 </androidx.drawerlayout.widget.DrawerLayout>
