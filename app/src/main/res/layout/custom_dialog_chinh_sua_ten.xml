@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@color/LightBlue"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_chinh_sua_ten_danh_sach"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Chỉnh sửa tên danh sách"
+            android:textStyle="bold"
+            android:textSize="30sp">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        >
+
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/shape"
+          android:ems="10"
+          android:id="@+id/ed_chinh_sua_ten_danh_sach"
+          android:inputType="text">
+
+      </EditText>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <Button
+            android:id="@+id/bt_cancel_chinh_sua_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:text="Cancel"
+            app:backgroundTint="@color/CadetBlue" />
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+        <Button
+            android:id="@+id/bt_hoan_tat_chinh_sua_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+
+            android:clickable="true"
+            android:contentDescription="nút thêm"
+            android:focusable="true"
+            android:text="Hoàn tất "
+            android:layout_weight="1"
+            app:backgroundTint="@color/CadetBlue" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

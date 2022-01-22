@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@color/LightBlue"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_thanh_vien_the_diaglog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ngày hết hạn"
+            android:textStyle="bold"
+            android:textSize="30sp">
+
+        </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_chon_ngay_het_han_diaglog"
+            android:layout_weight="1"
+            android:text="Chọn một ngày "
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@drawable/shape">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_chon_thoi_gian_het_han_diaglog"
+            android:layout_weight="1"
+            android:text="Chọn thời gian"
+            android:textStyle="bold"
+            android:background="@drawable/shape"
+            android:layout_marginStart="16dp"
+            android:textSize="20sp">
+        </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_thoi_diem_nhac_nho"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Thiết lập nhắc nhở "
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/sp_thiet_lap_nhac_nho"
+            >
+
+        </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+        <Button
+            android:id="@+id/bt_cancel_chon_ngay_het_han_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:text="Cancel"
+            app:backgroundTint="@color/CadetBlue" />
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0" />
+        <Button
+            android:id="@+id/bt_hoan_tat_chon_ngay_het_han_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+
+            android:clickable="true"
+            android:contentDescription="nút thêm"
+            android:focusable="true"
+            android:text="Hoàn tất "
+            android:layout_weight="1"
+            app:backgroundTint="@color/CadetBlue" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

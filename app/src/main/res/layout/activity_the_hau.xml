@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -16,18 +18,18 @@
             android:id="@+id/iv_hoan_thanh_the"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_thoat_hoan_thanh_the"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_thoat_hoan_thanh_the"
             app:srcCompat="@drawable/complete" />
 
         <ImageView
             android:id="@+id/iv_thoat_hoan_thanh_the"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -73,7 +75,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="545dp"
         android:ems="10"
         android:gravity="top"
         android:hint="Mô tả thẻ "
@@ -81,7 +82,6 @@
 
         android:minHeight="48dp"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +125,8 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/iv_thanh_vien"
         app:layout_constraintTop_toBottomOf="@+id/sp_nhan" />
+
+
 
     <ImageView
         android:id="@+id/iv_ngay_het_han"
@@ -191,36 +193,49 @@
         app:srcCompat="@android:drawable/arrow_down_float" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="302dp"
-
-        android:layout_height="203dp"
+        android:id="@+id/rv_danh_sach_cong_viec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_danh_sach_cong_viec"
-        tools:layout_editor_absoluteX="56dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/ed_them_cong_viec"
         android:layout_width="189dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Thêm công việc "
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_danh_sach_cong_viec" />
 
     <ImageView
         android:id="@+id/iv_them_cong_viec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/ed_them_cong_viec"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ed_them_cong_viec"
+        app:layout_constraintTop_toTopOf="@+id/ed_them_cong_viec"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
+    <CheckBox
+        android:id="@+id/cb_done_task"
+        android:layout_width="31dp"
+        android:layout_height="33dp"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_show_deadline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_show_deadline"
+        app:layout_constraintTop_toTopOf="@+id/tv_show_deadline" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

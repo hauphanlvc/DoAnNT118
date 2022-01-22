@@ -32,6 +32,8 @@ public class ActivityDangNhap extends AppCompatActivity {
         button_dang_nhap_activity = (Button) findViewById(R.id.button_dang_nhap_activity);
         ed_email = (EditText) findViewById(R.id.ed_email_dang_nhap);
         ed_password = (EditText) findViewById(R.id.ed_password_dang_nhap);
+        ed_email.setText("");
+        ed_password.setText("");
         password_nhap = ed_password.getText().toString();
         button_dang_nhap_activity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +108,7 @@ public class ActivityDangNhap extends AppCompatActivity {
         password_nhap = ed_password.getText().toString();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = reference.orderByChild("email").equalTo(email_nhap);
-        checkUser.addValueEventListener(new ValueEventListener() {
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {

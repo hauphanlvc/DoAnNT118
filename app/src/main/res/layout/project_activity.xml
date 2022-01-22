@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/CadetBlue"
+    android:id="@+id/dl_project_activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,28 +25,31 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back_danh_sach"
+            android:id="@+id/back_danh_sach_the"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/icon_back"
+            android:src="?attr/actionModeCloseDrawable"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
         <TextView
-            android:id="@+id/boards_danh_sach"
-            android:layout_width="143dp"
-            android:layout_height="27dp"
+            android:id="@+id/boards_danh_sach_the"
+            android:layout_width="230dp"
+            android:layout_height="28dp"
             android:layout_marginStart="10dp"
             android:text="Danh sách dự án"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/back_danh_sach"
-            app:layout_constraintStart_toEndOf="@+id/back_danh_sach"
-            app:layout_constraintTop_toTopOf="@+id/back_danh_sach" />
+            app:layout_constraintBottom_toBottomOf="@+id/back_danh_sach_the"
+            app:layout_constraintEnd_toStartOf="@+id/iv_navigation_view"
+            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintStart_toEndOf="@+id/back_danh_sach_the"
+            app:layout_constraintTop_toTopOf="@+id/back_danh_sach_the"
+            app:layout_constraintVertical_bias="0.333" />
 
         <ImageView
             android:id="@+id/notification_danh_sach"
@@ -55,50 +60,83 @@
             android:contentDescription="noficication symbol"
             android:src="@drawable/ic_notifications"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/boards_danh_sach"
+            app:layout_constraintStart_toEndOf="@+id/boards_danh_sach_the"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white" />
 
         <TextView
             android:id="@+id/textView3_ds"
-            android:layout_width="40dp"
-            android:layout_height="15dp"
+            android:layout_width="21dp"
+            android:layout_height="19dp"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="0"
             app:layout_constraintStart_toEndOf="@+id/notification_danh_sach"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_navigation_view"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_vertical_dots" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/List_danh_sach"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Action_bar_danh_sach"
-        >
-
-
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/List_danh_sach_the"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Action_bar_danh_sach">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_ds"
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <EditText
+            android:id="@+id/ed_them_the"
+            android:layout_width="219dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/shape"
+            android:ems="10"
+            android:hint="Thêm danh sách "
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/List_danh_sach_the" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_them_the"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:contentDescription="nút thêm"
+            android:focusable="true"
+            app:backgroundTint="@color/LightBlue"
+            app:layout_constraintBottom_toBottomOf="@+id/ed_them_the"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ed_them_the"
+            app:layout_constraintTop_toTopOf="@+id/ed_them_the"
+            app:srcCompat="@android:drawable/ic_input_add" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nv_chinh_sua_ten_du_an"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/LightBlue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:focusable="true"
-        />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+
+        app:menu="@menu/menu_danh_sach_task_list"
+        android:layout_gravity = 'end'/>
 </androidx.drawerlayout.widget.DrawerLayout>

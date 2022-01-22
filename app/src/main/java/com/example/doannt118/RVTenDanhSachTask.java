@@ -1,8 +1,6 @@
 package com.example.doannt118;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +10,22 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.doannt118.Class.TenDuAn;
+import com.example.doannt118.Class.TenDanhSachTask;
 
 import java.util.ArrayList;
 
-public class RecyleViewDanhSachDuAn extends RecyclerView.Adapter<RecyleViewDanhSachDuAn.ViewHolder>{
-    private ArrayList<TenDuAn> duAns;
+public class RVTenDanhSachTask extends RecyclerView.Adapter<RVTenDanhSachTask.ViewHolder>{
+    private ArrayList<TenDanhSachTask> TenDanhSachTasks;
     private Context context;
-    private static onClickListner onclicklistner;
-    public RecyleViewDanhSachDuAn(ArrayList<TenDuAn> duAns,Context context)
+    private static RVTenDanhSachTask.onClickListner onclicklistner;
+    public RVTenDanhSachTask(ArrayList<TenDanhSachTask> TenDanhSachTasks,Context context)
     {
-        this.duAns = duAns;
+        this.TenDanhSachTasks = TenDanhSachTasks;
         this.context = context;
     }
 
     @Override
-    public RecyleViewDanhSachDuAn.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RVTenDanhSachTask.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -35,15 +33,15 @@ public class RecyleViewDanhSachDuAn extends RecyclerView.Adapter<RecyleViewDanhS
         View contactView = inflater.inflate(R.layout.item_du_an, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        RVTenDanhSachTask.ViewHolder viewHolder = new RVTenDanhSachTask.ViewHolder(contactView);
         return viewHolder;
 
     }
     class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
-        public  TextView tv_project_name;
-                public ImageView iv_project;
+        public TextView tv_project_name;
+        public ImageView iv_project;
         public LinearLayout linear;
-        RecyleViewDanhSachDuAn adapter;
+        RVTenDanhSachTask adapter;
         public ViewHolder(View v) {
             super(v);
             tv_project_name = (TextView) v.findViewById(R.id.tv_project_name);
@@ -65,8 +63,8 @@ public class RecyleViewDanhSachDuAn extends RecyclerView.Adapter<RecyleViewDanhS
 //            return true;
 //        }
     }
-    public void setOnItemClickListener(onClickListner onclicklistner) {
-        RecyleViewDanhSachDuAn.onclicklistner = onclicklistner;
+    public void setOnItemClickListener(RVTenDanhSachTask.onClickListner onclicklistner) {
+        RVTenDanhSachTask.onclicklistner = onclicklistner;
     }
 //
 //    public void setHeader(View v) {
@@ -85,18 +83,18 @@ public class RecyleViewDanhSachDuAn extends RecyclerView.Adapter<RecyleViewDanhS
         return position == 0 ? 0 : 1;
     }
     @Override
-    public void onBindViewHolder(RecyleViewDanhSachDuAn.ViewHolder holder, int position) {
-        TenDuAn tenDuAn = duAns.get(position);
-        if (tenDuAn.getTen_Du_An()!=null)
+    public void onBindViewHolder(RVTenDanhSachTask.ViewHolder holder, int position) {
+        TenDanhSachTask TenDanhSachTask = TenDanhSachTasks.get(position);
+        if (TenDanhSachTask.getTen_danh_sach_task()!=null)
         {
-            holder.tv_project_name.setText(tenDuAn.getTen_Du_An());
+            holder.tv_project_name.setText(TenDanhSachTask.getTen_danh_sach_task());
         }
 //        holder.iv_project.setVisibility(View.VISIBLE);
     }
 
     @Override
     public int getItemCount() {
-        return duAns.size();
+        return TenDanhSachTasks.size();
     }
 
 }
