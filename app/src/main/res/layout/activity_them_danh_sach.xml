@@ -1,25 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_bar_them_danh_sach"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/LightBlue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/iv_thoat_tao_danh_sach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
+        <ImageView
+            android:id="@+id/iv_hoan_thanh_tao_danh_sach"
+            android:layout_width="27dp"
+            android:layout_height="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_thoat_tao_danh_sach"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_thoat_tao_danh_sach"
+            app:srcCompat="@drawable/complete" />
+
+        <TextView
+            android:id="@+id/tv_tao_danh_sach"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="24dp"
+            android:text="Thêm danh sách"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_thoat_tao_danh_sach"
+            app:layout_constraintStart_toEndOf="@+id/iv_thoat_tao_danh_sach"
+            app:layout_constraintTop_toTopOf="@+id/iv_thoat_tao_danh_sach"
+            app:layout_constraintVertical_bias="0.571" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:background="#00CCFF"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:textSize="18dp"
-        android:text="THÊM DANH SÁCH"/>
+        android:id="@+id/tv_ten_danh_sach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Tên danh sách "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/action_bar_them_danh_sach" />
 
     <EditText
-        android:id="@+id/Danh_sach"
-        android:layout_width="match_parent"
+        android:id="@+id/et_ten_danh_sach"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:textColor="#000000"
-        android:textSize="17dp"
-        android:hint="Tên danh sách"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType=""
+        android:minHeight="48dp"
 
-</LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ten_danh_sach" />
+</androidx.constraintlayout.widget.ConstraintLayout>

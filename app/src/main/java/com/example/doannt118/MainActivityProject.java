@@ -1,19 +1,5 @@
 package com.example.doannt118;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -21,94 +7,122 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 import com.example.doannt118.Class.Notification;
-import com.example.doannt118.Class.TenDanhSachTask;
-import com.example.doannt118.Class.TenThanhVienThe;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.doannt118.Class.TenDuAn;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-public class MainActivityProject extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    String email,project_name;
-    ArrayList<TenDanhSachTask> tenDanhSachTasks;
-    RVDanhSachTaskList adapter;
-    NavigationView nv_chinh_sua_ten_du_an;
-    DrawerLayout dl_project_activity;
-    Dialog dialog_chinh_sua_ten_du_an;
-    TextView boards_danh_sach_the;
-    Dialog dialog_them_thanh_vien ;
-    ArrayList<TenThanhVienThe> thanhVienThes;
+    DrawerLayout drawerLayout; // layout chính của board
+    NavigationView navigationView;
+    ArrayList<TenDuAn> tenDuAns;
+    FloatingActionButton fabAddTask,fabAdd,fabAddProject;
+    TextView tvAddCard,tvAddProject,tv_so_luong_thong_bao;
+    RvNewDuAn adapter;
+
+    AlertDialog.Builder diaglogDangXuat;
+    // kiểm tra nút add có đang nhấn hay không
+    String userId;
+    Boolean isAllFabsVisible;
+    String email;
+    int so_luong_thong_bao;
+
+    List<User> messages ;
+    ArrayList<Notification> notifications;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.project_activity);
+        setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        email = intent.getStringExtra("email");
-        project_name = intent.getStringExtra("project_name");
-        tenDanhSachTasks = new ArrayList<TenDanhSachTask>();
-        boards_danh_sach_the = (TextView) findViewById(R.id.boards_danh_sach_the);
 
-        dl_project_activity = (DrawerLayout) findViewById(R.id.dl_project_activity);
-        nv_chinh_sua_ten_du_an = (NavigationView) findViewById(R.id.nv_chinh_sua_ten_du_an);
-        findViewById(R.id.iv_navigation_view).setOnClickListener(new View.OnClickListener() {
+
+        drawerLayout = findViewById(R.id.drawerLayout);
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dl_project_activity.openDrawer(GravityCompat.END);
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-        thanhVienThes = new ArrayList<TenThanhVienThe>();
-        nv_chinh_sua_ten_du_an.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+        navigationView = findViewById(R.id.design_navigation_view);
+        navigationView.setItemIconTintList(null);
+
+        // Sau khi nhấn vào biểu tượng thông báo
+
+        // Lấy email từ login
+        notifications = new ArrayList<Notification>();
+        tv_so_luong_thong_bao = (TextView) findViewById(R.id.tv_so_luong_thong_bao);
+        Intent intent = getIntent();
+        email = intent.getStringExtra("email");
+        tenDuAns = new ArrayList<TenDuAn>();
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.textView);
+        navUsername.setText(email);
+        getAllNotifications();
+        findViewById(R.id.notification).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-
-                if (id == R.id.it_chinh_sua_du_an)
-                {
-//                            Toast.makeText(MainActivityProject.this, "Chọn Settings ", Toast.LENGTH_SHORT).show();
-                    displayDialog(MainActivityProject.this);
-                    dl_project_activity.closeDrawers();
-                }
-                else if (id == R.id.it_them_thanh_vien)
-                {
-//                    displayThemThanhVien(MainActivityProject.this);
-
-                    GetAllTenUserCoTrongProject();
-                    dl_project_activity.closeDrawers();
-                }
-                return true;
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), NotificationsActivity.class);
+                intent.putExtra("email", email);
+                view.getContext().startActivity(intent);
             }
         });
-
-
-        CacThaoTacTrenThanhBar();
-        HienThiTenCacDanhSachTask();
-        ThemDanhSachTask();
+        AddTaskButton();
+        HienThiTenDuAn();
+        DangXuat();
 
     }
-    public void GetAllTenUserCoTrongProject()
+    public void getAllNotifications()
     {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-        reference.child(project_name).child("member_of_project").addListenerForSingleValueEvent(new ValueEventListener() {
+        int copy_so_luong_thong_bao = so_luong_thong_bao;
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        reference.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                thanhVienThes.clear();
-                for (DataSnapshot i:dataSnapshot.getChildren())
+                notifications.clear();
+
+                if (dataSnapshot.exists())
                 {
-                    thanhVienThes.add(new TenThanhVienThe(i.child("email_member").getValue(String.class),true));
-                    Log.d("TAG", thanhVienThes.toString());
+                    Log.d("TAG", "danh sach thong bao " + dataSnapshot.getRef().toString());
+                    for (DataSnapshot i: dataSnapshot.child("notifications").getChildren())
+                    {
+                        notifications.add(new Notification(i.child("email_moi").getValue(String.class),i.child("project").getValue(String.class),i.child("agree").getValue(Boolean.class),i.child("confirm").getValue(Boolean.class),i.child("link_email_moi_project").getValue(String.class)));
+                        if ( i.child("confirm").getValue(Boolean.class) == false)
+                        {
+                            so_luong_thong_bao = so_luong_thong_bao + 1;
+                        }
+                    }
+                    Log.d("TAG", "danh sach thong bao 2 " + so_luong_thong_bao);
+                    tv_so_luong_thong_bao.setText( String.valueOf(so_luong_thong_bao));
                 }
-                displayThemThanhVien(MainActivityProject.this);
+
+
             }
 
             @Override
@@ -117,188 +131,96 @@ public class MainActivityProject extends AppCompatActivity {
             }
         });
     }
-
-    public void displayThemThanhVien(Activity activity)
+    public void DangXuat()
     {
-
-        dialog_them_thanh_vien = new Dialog(this,R.style.Theme_Dialog);
-        dialog_them_thanh_vien.setCancelable(false);
-        dialog_them_thanh_vien.setContentView(R.layout.custom_dialog_them_thanh_vien);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-
-        EditText ed_chinh_sua_ten_thanh_vien = (EditText) dialog_them_thanh_vien.findViewById(R.id.ed_chinh_sua_ten_thanh_vien);
-
-        if (!isFinishing())
-        {
-            dialog_them_thanh_vien.show();
-        }
-        RecyclerView ListThanhVienDialog = (RecyclerView) dialog_them_thanh_vien.findViewById(R.id.rv_danh_sach_thanh_vien);
-        ListThanhVienDialog.setHasFixedSize(false);
-        RVAdapterDanhSachThanhVienTheDiaglog adapter = new RVAdapterDanhSachThanhVienTheDiaglog(thanhVienThes, this);
-//
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        ListThanhVienDialog.setAdapter(adapter);
-        ListThanhVienDialog.setLayoutManager(linearLayoutManager);
-        Button bt_hoan_tat_them_thanh_vien_dialog = (Button) dialog_them_thanh_vien.findViewById(R.id.bt_hoan_tat_them_thanh_vien_dialog);
-        bt_hoan_tat_them_thanh_vien_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email_thanh_vien = ed_chinh_sua_ten_thanh_vien.getText().toString();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-                Query checkUser = reference.orderByChild("email").equalTo(email_thanh_vien);
-                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists())
-                        {
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-                            reference.child(email_thanh_vien).child("notifications").child(email+"_" + project_name).setValue(new Notification(email,project_name,false,false,email+"_" + project_name));
-                            dialog_them_thanh_vien.cancel();
-                        }
-                        else
-                        {
-                            ed_chinh_sua_ten_thanh_vien.setError("Tài khoàn không tồn tại ");
-                            ed_chinh_sua_ten_thanh_vien.requestFocus();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                       int id = menuItem.getItemId();
+                       if (id == R.id.menuLogOut)
+                       {
+                           diaglogDangXuat.setMessage("Bạn có muốn đăng xuất không? ")
+                                   .setCancelable(false)
+                                   .setPositiveButton("Oke", new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialog, int which) {
+                                           Intent intent = new Intent(MainActivity.this,StartActivity.class);
+                                           startActivity(intent);
+                                           finish();
+                                       }
+                                   })
+                                   .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                       public void onClick(DialogInterface dialog, int id) {
+                                           //  Action for 'NO' Button
+                                           dialog.cancel();
+                                           Toast.makeText(getApplicationContext(),"Bạn chọn không xóa ",
+                                                   Toast.LENGTH_SHORT).show();
+                                       }
+                                   });
+                           AlertDialog alert = diaglogDangXuat.create();
+                           alert.show();
+                       }
+                       else if (id == R.id.menuSettings)
+                       {
+                           Toast.makeText(MainActivity.this, "Chọn Settings ", Toast.LENGTH_SHORT).show();
+                       }
+                        return true;
                     }
                 });
-
-            }
-        });
-        Button bt_cancel_them_thanh_vien_dialog = (Button) dialog_them_thanh_vien.findViewById(R.id.bt_cancel_them_thanh_vien_dialog);
-        bt_cancel_them_thanh_vien_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog_them_thanh_vien.cancel();
-            }
-        });
-
-
     }
-    public void displayDialog(Activity activity)
-    {
-        dialog_chinh_sua_ten_du_an = new Dialog(this,R.style.Theme_Dialog);
-        dialog_chinh_sua_ten_du_an.setCancelable(false);
-        dialog_chinh_sua_ten_du_an.setContentView(R.layout.custom_dialog_chinh_sua_ten);
-        getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-        TextView tv_chinh_sua_ten_danh_sach = (TextView) dialog_chinh_sua_ten_du_an.findViewById(R.id.tv_chinh_sua_ten_danh_sach);
-        tv_chinh_sua_ten_danh_sach.setText("Chỉnh sửa tên dự án");
-        EditText ed_chinh_sua_ten_danh_sach = (EditText) dialog_chinh_sua_ten_du_an.findViewById(R.id.ed_chinh_sua_ten_danh_sach);
+//    public void getAllEmail(Map<String,Object> user)
+    public void printResult(){
 
-        ed_chinh_sua_ten_danh_sach.setText(project_name);
-        String old_project_name = project_name;
-        if (!isFinishing())
-        {
-            dialog_chinh_sua_ten_du_an.show();
-        }
-
-        Button bt_hoan_tat_chinh_sua_dialog = (Button) dialog_chinh_sua_ten_du_an.findViewById(R.id.bt_hoan_tat_chinh_sua_dialog);
-        bt_hoan_tat_chinh_sua_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String old_project_name = project_name;
-                String new_project_name= ed_chinh_sua_ten_danh_sach.getText().toString();
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-                reference.child(old_project_name).child("project_name").setValue(new_project_name);
-
-                DatabaseReference new_refernce = reference.child(new_project_name);
-                reference.child(old_project_name).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        new_refernce.setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isComplete()) {
-                                    Log.d("TAG", "Success!");
-                                    reference.child(old_project_name).removeValue();
-                                } else {
-                                    Log.d("TAG", "Copy failed!");
-                                }
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                project_name = new_project_name;
-                boards_danh_sach_the.setText("Các danh sách của " + project_name);
-                dialog_chinh_sua_ten_du_an.cancel();
-            }
-        });
-        Button bt_cancel_chinh_sua_dialog = (Button) dialog_chinh_sua_ten_du_an.findViewById(R.id.bt_cancel_chinh_sua_dialog);
-        bt_cancel_chinh_sua_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog_chinh_sua_ten_du_an.cancel();
-            }
-        });
-
-
-    }
-    public void CacThaoTacTrenThanhBar()
-    {
-        TextView tv_boards_danh_sach = (TextView) findViewById(R.id.boards_danh_sach_the);
-        tv_boards_danh_sach.setText(project_name);
-        ImageView im_back_danh_sach = (ImageView) findViewById(R.id.back_danh_sach_the);
-        im_back_danh_sach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
-    }
-    public void printResult()
-    {
-        Log.d("TAG", "printResult: "+tenDanhSachTasks.toString());
-        RecyclerView ListDanhSachTask = (RecyclerView) findViewById(R.id.List_danh_sach_the);
-        adapter = new RVDanhSachTaskList(tenDanhSachTasks,this,email,project_name);
-        ListDanhSachTask.setHasFixedSize(false);
+        Log.d("TAG", "printResult: "+tenDuAns.toString());
+        RecyclerView ListProject = (RecyclerView) findViewById(R.id.ListProject);
+        adapter = new RvNewDuAn(tenDuAns,this);
+        ListProject.setHasFixedSize(false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        ListDanhSachTask.setAdapter(adapter);
-        ListDanhSachTask.setLayoutManager(linearLayoutManager);
-        adapter.setOnItemClickListener(new RVDanhSachTaskList.onClickListner() {
+        ListProject.setAdapter(adapter);
+        ListProject.setLayoutManager(linearLayoutManager);
+        adapter.setOnItemClickListener(new RvNewDuAn.onClickListner() {
             private static final String TAG = "adapter";
             @Override
             public void onItemClick(int position, View v) {
-                Toast.makeText(MainActivityProject.this, tenDanhSachTasks.get(position).getTen_danh_sach_task(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(v.getContext(),  TaskList.class);
+                Toast.makeText(MainActivity.this, "chọn dự án ", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(v.getContext(),  MainActivityProject.class);
                 intent.putExtra("email", email);
-                intent.putExtra("project_name",project_name);
-                intent.putExtra("task_list_name",tenDanhSachTasks.get(position).getTen_danh_sach_task());
+                intent.putExtra("project_name",tenDuAns.get(position).getTen_Du_An());
+
                 v.getContext().startActivity(intent);
 
             }
         });
     }
-    public void HienThiTenCacDanhSachTask()
+
+
+    public void HienThiTenDuAn()
     {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-        reference.child(project_name).child("task_lists").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists())
+                tenDuAns.clear();
+                ArrayList<String> list_project = new ArrayList<String>();
+                for (DataSnapshot datas: dataSnapshot.getChildren())
                 {
-                    tenDanhSachTasks.clear();
-                    for (DataSnapshot i: dataSnapshot.getChildren())
+                    list_project.clear();
+                    for (DataSnapshot datas_1 : datas.child("member_of_project").getChildren())
                     {
-                        tenDanhSachTasks.add(new TenDanhSachTask(i.child("task_list_name").getValue(String.class)));
-                        if (i.exists())
-                        {
-                            Log.d("TAG", "onDataChange: " + "co ton tai task list name");
-                        }
-                        else
-                            Log.d("TAG", "onDataChange: " + "meo ton tai task list name");
+//                        tenDuAns.add(new TenDuAn(datas_1.child("email_member").getValue(String.class)));
+                        list_project.add(datas_1.child("email_member").getValue(String.class));
+                        Log.d("TAG", datas_1.child("email_member").getRef().toString());
+                    }
+
+                    if (list_project.contains(email))
+                    {
+                        tenDuAns.add(new TenDuAn(datas.child("project_name").getValue(String.class)));
                     }
                 }
 
+
+                Log.d("TAG", "getListProject: "+ tenDuAns.toString());
                 printResult();
             }
 
@@ -307,45 +229,82 @@ public class MainActivityProject extends AppCompatActivity {
 
             }
         });
+
+
+
     }
-    public void ThemDanhSachTask()
+
+    public void AddTaskButton()
     {
-        EditText ed_them_danh_sach = (EditText) findViewById(R.id.ed_them_the);
-        ImageView im_back_danh_sach = (ImageView) findViewById(R.id.back_danh_sach_the);
-        ImageView iv_hoan_thanh_tao_danh_sach_task = (ImageView) findViewById(R.id.iv_navigation_view);
-        FloatingActionButton fab_them_danh_sach = (FloatingActionButton) findViewById(R.id.fab_them_the);
-        fab_them_danh_sach.setOnClickListener(new View.OnClickListener() {
+        isAllFabsVisible = false;
+
+        fabAdd = (FloatingActionButton) findViewById(R.id.fab);
+        fabAddTask = (FloatingActionButton) findViewById(R.id.fabAddTask);
+        tvAddCard = (TextView) findViewById(R.id.textViewAddTask);
+        tvAddProject= (TextView) findViewById(R.id.tv_add_project);
+        fabAddProject = (FloatingActionButton) findViewById(R.id.fabAddProject);
+        fabAddProject.setVisibility(View.GONE);
+        fabAddTask.setVisibility(View.GONE);
+        tvAddCard.setVisibility(View.GONE);
+        tvAddProject.setVisibility(View.GONE);
+        fabAdd.show();
+        fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ed_them_danh_sach.getText().toString().equals(""))
+                if (!isAllFabsVisible)
                 {
-                    Toast.makeText(MainActivityProject.this, "Vui lòng đừng bỏ trống ô nhập thêm danh sách ", Toast.LENGTH_SHORT).show();
+                    fabAddTask.show();
+                    tvAddCard.setVisibility(View.VISIBLE);
+                    tvAddProject.setVisibility(View.VISIBLE);
+                    fabAdd.show();
+                    fabAddProject.show();
+
+                    isAllFabsVisible = true;
                 }
                 else
                 {
-                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("project");
-                    reference.child(project_name).child("task_lists").child(ed_them_danh_sach.getText().toString()).child("task_list_name").setValue(ed_them_danh_sach.getText().toString());
+                    fabAddTask.hide();
+                    fabAddProject.hide();
+                    tvAddCard.setVisibility(View.GONE);
+                    tvAddProject.setVisibility(View.GONE);
+                    fabAdd.show();
+                    isAllFabsVisible= false;
 
-                    tenDanhSachTasks.add(new TenDanhSachTask(ed_them_danh_sach.getText().toString()));
-                    adapter.notifyDataSetChanged();
-                    ed_them_danh_sach.setText("");
                 }
+
+                fabAddTask.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this, "thêm thẻ nào ", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                fabAddProject.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        Toast.makeText(MainActivity.this, "thêm dự án  nào ", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                        Intent intent = new Intent(v.getContext(), Activity_them_du_an.class);
+                        intent.putExtra("email", email);
+                        v.getContext().startActivity(intent);
+
+                    }
+                });
+
             }
         });
-//        ed_them_danh_sach.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                im_back_danh_sach.setImageDrawable( ContextCompat.getDrawable(v.getContext(),android.R.drawable.ic_delete));
-//                iv_hoan_thanh_tao_danh_sach_task.setImageDrawable(ContextCompat.getDrawable(v.getContext(),R.drawable.complete));
-//
-//            }
-//        });
 
     }
     @Override
     protected void onResume() {
         super.onResume();
-        HienThiTenCacDanhSachTask();
+        getAllNotifications();
+        HienThiTenDuAn();
+
+//        getAllNotifications();
+//        adapter.notifyItemInserted(lessonId.getSize()-1);
 
     }
+
 }
