@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUsername = (TextView) headerView.findViewById(R.id.textView);
         navUsername.setText(email);
+        so_luong_thong_bao = 0;
         getAllNotifications();
         findViewById(R.id.notification).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getAllNotifications()
     {
-        int copy_so_luong_thong_bao = so_luong_thong_bao;
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         reference.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -297,8 +298,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        super.onRestart();
+
+        Log.d("TAG", "onResume: " + so_luong_thong_bao);
+        so_luong_thong_bao = 0;
         getAllNotifications();
         HienThiTenDuAn();
 

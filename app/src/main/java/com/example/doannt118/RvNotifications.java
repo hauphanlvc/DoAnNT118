@@ -107,6 +107,7 @@ public class RvNotifications extends RecyclerView.Adapter<RvNotifications.ViewHo
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
                 reference.child("users").child(email).child("notifications").child(notification.getLink_email_moi_project()).child("confirm").setValue(true);
                 reference.child("users").child(email).child("notifications").child(notification.getLink_email_moi_project()).child("agree").setValue(true);
+                reference.child("users").child(email).child("notifications").child(notification.getLink_email_moi_project()).removeValue();
 //                DatabaseReference new_reference = FirebaseDatabase.getInstance().getReference("project");
                 reference.child("project").child(notification.getProject()).child("member_of_project").child(email).child("email_member").setValue(email);
           }
@@ -123,6 +124,7 @@ public class RvNotifications extends RecyclerView.Adapter<RvNotifications.ViewHo
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
                 reference.child(email).child("notifications").child(notification.getLink_email_moi_project()).child("confirm").setValue(true);
                 reference.child(email).child("notifications").child(notification.getLink_email_moi_project()).child("agree").setValue(false);
+                reference.child("users").child(email).child("notifications").child(notification.getLink_email_moi_project()).removeValue();
 
             }
         });
