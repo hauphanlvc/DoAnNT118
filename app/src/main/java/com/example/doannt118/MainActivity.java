@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.design_navigation_view);
         navigationView.setItemIconTintList(null);
 
-        // Sau khi nhấn vào biểu tượng thông báo
+
 
         // Lấy email từ login
         notifications = new ArrayList<Notification>();
